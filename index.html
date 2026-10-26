@@ -1,0 +1,1061 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Taksim 360 Teklif Sunumu</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Marcellus&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: full-screen slide stage, fixed top bar + bottom control rail; each slide is a two-zone composition (label column + content) */
+:root{
+  --bg:#ECE3D6; --surface:#F6F0E7; --ink:#2B231C; --muted:#75665A; --line:#D3C4B1;
+  --bronze:#9A6A3A; --bronze-2:#C49A69; --deep:#3A2E25; --onDeep:#F3EADF;
+  --c1:#9A6A3A; --c2:#5E7A6B; --c3:#B4824F; --c4:#6F6A8C; --c5:#A3584A; --c6:#C9B08C;
+  --good:#3F7A55; --logo:#424A52; --t360:#93693D;
+  --f-display:"Marcellus","Trajan Pro",Georgia,serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --shadow:0 1px 0 rgba(43,35,28,.04),0 12px 30px -18px rgba(43,35,28,.35);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1E1915; --surface:#28211B; --ink:#EFE6DA; --muted:#AE9F8E; --line:#43382E;
+  --bronze:#D2A473; --bronze-2:#A87E52; --deep:#120E0B; --onDeep:#F3EADF;
+  --c1:#D2A473; --c2:#86A595; --c3:#E0B47F; --c4:#A19CC2; --c5:#D08676; --c6:#8E7A5E;
+  --good:#7FC096; --logo:#EFE6DA; --t360:#D2A473; color-scheme:dark;
+  --shadow:0 12px 30px -18px rgba(0,0,0,.7);
+}}
+:root[data-theme="dark"]{
+  --bg:#1E1915; --surface:#28211B; --ink:#EFE6DA; --muted:#AE9F8E; --line:#43382E;
+  --bronze:#D2A473; --bronze-2:#A87E52; --deep:#120E0B; --onDeep:#F3EADF;
+  --c1:#D2A473; --c2:#86A595; --c3:#E0B47F; --c4:#A19CC2; --c5:#D08676; --c6:#8E7A5E;
+  --good:#7FC096; --logo:#EFE6DA; --t360:#D2A473; color-scheme:dark;
+  --shadow:0 12px 30px -18px rgba(0,0,0,.7);
+}
+html,body{height:100%}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.55;overflow:hidden}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+.num,.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+
+.app{height:100%;display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:minmax(0,1fr)}
+.topbar{display:flex;align-items:center;gap:16px;padding-block:12px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:12px;white-space:nowrap}
+.toplogo{height:30px}
+.brand b{padding-left:12px;border-left:1px solid var(--line)}
+.tsplogo svg{display:block;height:clamp(64px,7vw,92px);width:auto;aspect-ratio:241/105;color:var(--logo)}
+svg.toplogo{display:block;width:auto;aspect-ratio:241/105;color:var(--logo)}
+.catalog{margin:0;justify-self:center;width:100%;max-width:min(100%,calc(70vh * .82));background:#EFEBE4;padding:10px;border-radius:3px;box-shadow:0 1px 2px rgba(43,35,28,.12),0 24px 48px -20px rgba(43,35,28,.45);transform:rotate(-1.2deg)}
+.catalog img{display:block;width:100%;height:auto}
+.dial{margin:0;justify-self:center;width:100%;max-width:min(100%,62vh);display:flex;flex-direction:column;align-items:center;gap:10px}
+.dial-stage{position:relative;width:100%;aspect-ratio:1;cursor:grab;touch-action:none;user-select:none}
+.dial-stage.drag{cursor:grabbing}
+.dial-rot,.dial-fixed{position:absolute;inset:0;width:100%;height:100%}
+.dial-rot{will-change:transform}
+.dial-ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.dial-ring .bezel{fill:var(--surface);stroke:var(--line);stroke-width:1.5}
+.dial-ring .t{stroke:var(--muted);stroke-width:1}
+.dial-ring .t.m{stroke:var(--ink);stroke-width:2}
+.dial-ring .n{fill:var(--muted);font:500 11px var(--f-mono);text-anchor:middle;dominant-baseline:central}
+.dial-ring .c{fill:var(--ink);font:400 22px var(--f-display);text-anchor:middle;dominant-baseline:central}
+.dial-ring .c.k{fill:var(--bronze)}
+.dial-pano{position:absolute;left:16%;top:16%;width:68%;height:68%;border-radius:50%;object-fit:cover;box-shadow:0 0 0 3px var(--surface),0 0 0 4px var(--line),0 18px 40px -18px rgba(43,35,28,.6);pointer-events:none}
+.dial-fixed{pointer-events:none;overflow:visible}
+.dial-fixed .lubber{fill:var(--bronze)}
+.dial-fixed .lubber-line{stroke:var(--bronze);stroke-width:2}
+.dial-read{display:flex;justify-content:center;width:100%;margin-top:4px}
+.dial-deg{display:flex;align-items:baseline;justify-content:center;gap:10px}
+.dial-deg b{font:500 clamp(20px,2vw,26px)/1 var(--f-mono);font-variant-numeric:tabular-nums;min-width:4.2ch;text-align:right;color:var(--ink)}
+.dial-deg span{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--bronze);min-width:15ch}
+.dial-btn{font-size:12px;padding:4px 12px;margin-top:2px}
+.dial-tag{font-family:var(--f-display);font-size:clamp(15px,1.4vw,18px);color:var(--muted);text-align:center;max-width:none}
+.t360{display:block;width:clamp(220px,26vw,340px);height:auto;aspect-ratio:240/72;color:var(--t360)}
+.brand b{font-family:var(--f-display);font-weight:400;font-size:20px;letter-spacing:.06em}
+.brand span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.crumb{flex:1;min-width:0;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.crumb em{font-style:normal;color:var(--bronze);font-family:var(--f-mono);margin-right:8px}
+.iconbtn{border:1px solid var(--line);background:transparent;border-radius:999px;padding:6px 14px;font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.iconbtn:hover{border-color:var(--bronze);color:var(--bronze)}
+
+.stage{position:relative;overflow:hidden}
+.slide{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;padding-block:clamp(20px,4vh,48px);padding-left:max(20px,env(safe-area-inset-left,0px),4vw);padding-right:max(20px,env(safe-area-inset-right,0px),4vw);opacity:0;visibility:hidden;transform:translateX(24px);transition:opacity .45s ease,transform .45s ease,visibility 0s .45s}
+.slide.active{opacity:1;visibility:visible;transform:none;transition:opacity .45s ease,transform .45s ease}
+.slide.before{transform:translateX(-24px)}
+.inner{max-width:1240px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;justify-content:center;gap:28px}
+
+.rail{display:flex;align-items:center;gap:14px;padding-block:10px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px));border-top:1px solid var(--line)}
+.navbtn{width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;font-size:18px}
+.navbtn:hover:not(:disabled){border-color:var(--bronze);color:var(--bronze)}
+.navbtn:disabled{opacity:.35;cursor:default}
+.progress{flex:1;display:flex;gap:4px;align-items:center;min-width:0}
+.progress button{flex:1;height:22px;border:0;background:transparent;padding:0;position:relative}
+.progress button::after{content:"";position:absolute;left:0;right:0;top:9px;height:4px;border-radius:2px;background:var(--line);transition:background .3s}
+.progress button.done::after{background:var(--bronze-2)}
+.progress button.on::after{background:var(--bronze);height:6px;top:8px}
+.counter{font-family:var(--f-mono);font-size:13px;color:var(--muted);min-width:56px;text-align:right}
+
+/* typography */
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--bronze)}
+h1,h2,h3{font-family:var(--f-display);font-weight:400;text-wrap:balance;margin:0;line-height:1.12}
+h1{font-size:clamp(38px,6vw,78px);letter-spacing:.02em}
+h2{font-size:clamp(28px,3.6vw,46px)}
+h3{font-size:clamp(20px,2vw,26px)}
+p{margin:0;max-width:66ch}
+.lead{font-size:clamp(16px,1.4vw,19px);color:var(--ink)}
+.muted{color:var(--muted)}
+.head{display:flex;flex-direction:column;gap:10px}
+
+/* section opener */
+.opener{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(24px,4vw,64px);align-items:center}
+.secnum{font-family:var(--f-display);font-size:clamp(90px,15vw,200px);line-height:.8;color:var(--bronze);opacity:.9}
+.photo{border-radius:4px;overflow:hidden;background:var(--line);position:relative}
+.photo img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* cover */
+.cover{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,72px);align-items:center}
+.cover .photo{aspect-ratio:4/5;max-height:72vh}
+.wordmark{display:inline-flex;align-items:stretch;border:2px solid var(--bronze);font-family:var(--f-display);font-size:clamp(26px,3vw,40px);letter-spacing:.08em;color:var(--bronze)}
+.wordmark span{padding:4px 14px}
+.wordmark span+span{border-left:2px solid var(--bronze)}
+.tsp{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.06em;font-size:22px}
+.tsp i{display:grid;grid-template-columns:repeat(3,5px);gap:2px}
+.tsp i b{width:5px;height:5px;background:var(--bronze)}
+.tsp i b:nth-child(2n){background:var(--muted)}
+.tsp small{display:block;font-size:10px;font-weight:600;letter-spacing:.14em;color:var(--muted);text-transform:uppercase}
+
+/* agenda */
+.agenda{display:grid;gap:0;border-top:1px solid var(--line)}
+.agenda button{display:grid;grid-template-columns:72px 1fr auto;align-items:center;gap:16px;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--line);padding:18px 4px;transition:background .2s,padding .2s}
+.agenda button:hover{background:var(--surface);padding-left:14px}
+.agenda .n{font-family:var(--f-display);font-size:34px;color:var(--bronze)}
+.agenda .t{font-size:clamp(15px,1.5vw,19px);font-weight:600}
+.agenda .go{color:var(--muted);font-size:13px}
+
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.card h3{font-size:20px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:color-mix(in srgb,var(--bronze) 14%,transparent);color:var(--bronze);font-size:12px;font-weight:700;letter-spacing:.04em}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;background:var(--surface)}
+
+/* org chart */
+.orgwrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}
+.org{overflow-x:auto;padding-bottom:8px}
+.tree,.tree ul{list-style:none;margin:0;padding:0}
+.tree ul{display:flex;justify-content:center;padding-top:22px;position:relative}
+.tree li{position:relative;padding:22px 6px 0;display:flex;flex-direction:column;align-items:center}
+.tree li::before,.tree li::after{content:"";position:absolute;top:0;right:50%;width:50%;height:22px;border-top:1.5px solid var(--bronze-2)}
+.tree li::after{right:auto;left:50%;border-left:1.5px solid var(--bronze-2)}
+.tree li:only-child::before,.tree li:only-child::after{display:none}
+.tree li:only-child{padding-top:0}
+.tree li:first-child::before,.tree li:last-child::after{border:0}
+.tree li:last-child::before{border-right:1.5px solid var(--bronze-2);border-radius:0 6px 0 0}
+.tree li:first-child::after{border-radius:6px 0 0 0}
+.tree ul ul::before{content:"";position:absolute;top:0;left:50%;height:22px;border-left:1.5px solid var(--bronze-2)}
+.tree>li{padding-top:0}
+.tree>li::before,.tree>li::after{display:none}
+.node{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:10px 14px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;box-shadow:var(--shadow);transition:all .2s;border-top:3px solid var(--bronze-2)}
+.node:hover{border-color:var(--bronze)}
+.node.sel{background:var(--deep);color:var(--onDeep);border-color:var(--deep);border-top-color:var(--bronze)}
+.node small{display:block;font-family:var(--f-mono);font-weight:400;letter-spacing:0;text-transform:none;opacity:.75;font-size:11px}
+.orgtop{display:flex;align-items:center;gap:14px;justify-content:center}
+.support{display:flex;flex-direction:column;gap:6px;padding-right:14px;border-right:1.5px dashed var(--bronze-2)}
+.support .node{font-size:11px;padding:6px 10px;border-top-width:1px}
+.panel{background:var(--deep);color:var(--onDeep);border-radius:6px;padding:26px;display:flex;flex-direction:column;gap:12px;position:sticky;top:0}
+.panel .eyebrow{color:var(--bronze-2)}
+.panel h3{color:var(--onDeep)}
+.panel p{color:color-mix(in srgb,var(--onDeep) 85%,transparent);font-size:15px}
+.panel .stats{display:flex;gap:24px;flex-wrap:wrap;padding-top:10px;border-top:1px solid color-mix(in srgb,var(--onDeep) 20%,transparent)}
+.panel .stats div{display:flex;flex-direction:column}
+.panel .stats b{font-family:var(--f-mono);font-size:20px;font-weight:500}
+.panel .stats span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.7}
+
+/* split text + visual */
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center}
+.points{display:flex;flex-direction:column;gap:14px;margin:0;padding:0;list-style:none}
+.points li{display:grid;grid-template-columns:28px 1fr;gap:12px;align-items:start}
+.points li::before{content:"";width:10px;height:10px;margin-top:8px;border:2px solid var(--bronze);transform:rotate(45deg)}
+
+/* word cloud (Saha Sorumlusu) */
+.wimg{display:block;width:100%;max-width:min(100%,340px);height:auto;border-radius:6px;border:1px solid var(--line)}
+.wcloud{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;padding:18px 20px;border:1px solid var(--line);border-radius:6px;background:var(--surface);font-weight:800;text-transform:uppercase;line-height:1.05;color:var(--ink)}
+.wcloud span{letter-spacing:.02em}
+.wcloud .a{color:var(--bronze)}
+.wcloud .w1{font-size:11px;opacity:.6}.wcloud .w2{font-size:14px;opacity:.8}.wcloud .w3{font-size:18px}.wcloud .w4{font-size:24px}.wcloud .w5{font-size:clamp(26px,3vw,36px);letter-spacing:-.01em}
+/* video */
+.vidgrid{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px;align-items:start}
+.vidbox{background:#000;border-radius:6px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:16/9;width:100%;max-width:min(100%,calc(62vh * 16 / 9))}
+.vidbox video{display:block;width:100%;height:100%;background:#000}
+.cues{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.cues button{width:100%;text-align:left;display:grid;grid-template-columns:44px 1fr;gap:2px 12px;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;transition:border-color .2s,background .2s}
+.cues button:hover{border-color:var(--bronze)}
+.cues button.on{border-color:var(--bronze);box-shadow:inset 3px 0 0 var(--bronze)}
+.cues .tc{grid-row:span 2;font-family:var(--f-mono);font-size:13px;color:var(--bronze);padding-top:1px}
+.cues b{font-size:14px}
+.cues span:last-child{font-size:13px;color:var(--muted);line-height:1.4}
+/* flow */
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:f}
+.flow div{position:relative;padding:18px 18px 18px 0;border-top:2px solid var(--bronze);display:flex;flex-direction:column;gap:6px}
+.flow div::before{counter-increment:f;content:counter(f);position:absolute;top:-15px;left:0;width:28px;height:28px;border-radius:50%;background:var(--bronze);color:var(--surface);font:600 13px/28px var(--f-mono);text-align:center}
+.flow b{padding-top:10px;font-size:15px}
+.flow span{font-size:14px;color:var(--muted)}
+
+/* cadence (muhasebe) */
+.cadence{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.cadence .card{gap:6px;padding:18px}
+.cadence .when{font-family:var(--f-mono);font-size:12px;color:var(--bronze);text-transform:uppercase;letter-spacing:.08em}
+.cadence b{font-size:15px}
+.cadence span{font-size:14px;color:var(--muted)}
+
+/* bars */
+.hbars{display:flex;flex-direction:column;gap:10px}
+.hbar{display:grid;grid-template-columns:minmax(120px,190px) 1fr 48px;gap:12px;align-items:center;font-size:14px}
+.hbar .track{height:18px;background:color-mix(in srgb,var(--line) 55%,transparent);border-radius:2px;overflow:hidden}
+.hbar .fill{height:100%;width:0;background:var(--bronze);transition:width .9s cubic-bezier(.2,.7,.2,1)}
+.hbar .v{font-family:var(--f-mono);text-align:right;font-weight:500}
+.hbar.total{border-top:1px solid var(--line);padding-top:10px;font-weight:700}
+.bignum{font-family:var(--f-display);font-size:clamp(64px,9vw,120px);line-height:1;color:var(--bronze)}
+
+/* cost breakdown */
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--surface)}
+.toggle button{border:0;background:transparent;padding:6px 14px;border-radius:999px;font-size:13px;font-weight:700}
+.toggle button.on{background:var(--deep);color:var(--onDeep)}
+.costgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(20px,3vw,44px);align-items:center}
+.donut{position:relative;max-width:360px;width:100%;margin:0 auto;aspect-ratio:1}
+.donut svg{width:100%;height:100%;transform:rotate(-90deg)}
+.donut circle{fill:none;stroke-width:22;transition:stroke-width .2s,opacity .2s}
+.donut .center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px}
+.donut .center small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.donut .center b{font-family:var(--f-mono);font-weight:500;font-size:clamp(17px,2vw,24px)}
+.legend{display:flex;flex-direction:column}
+.legend button{display:grid;grid-template-columns:14px 1fr auto auto;gap:12px;align-items:center;text-align:left;background:transparent;border:0;border-bottom:1px solid var(--line);padding:11px 6px;font-size:14px;transition:background .15s}
+.legend button:hover,.legend button.hl{background:var(--surface)}
+.legend .sw{width:14px;height:14px;border-radius:2px}
+.legend .amt{font-family:var(--f-mono)}
+.legend .pct{font-family:var(--f-mono);color:var(--muted);width:56px;text-align:right}
+.legend .sum{display:grid;grid-template-columns:1fr auto;gap:12px;padding:10px 6px;font-size:14px}
+.legend .sum.grand{background:var(--deep);color:var(--onDeep);border-radius:4px;padding:14px 12px;margin-top:8px;font-weight:700}
+.legend .sum span:last-child{font-family:var(--f-mono)}
+
+/* role breakdown */
+.rolepick{display:flex;flex-wrap:wrap;gap:8px}
+.rolepick button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600}
+.rolepick button.on{background:var(--deep);color:var(--onDeep);border-color:var(--deep)}
+.stack{display:flex;height:40px;border-radius:3px;overflow:hidden;width:100%}
+.stack div{height:100%;transition:flex-grow .6s ease;min-width:0}
+.rolegrid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:start}
+.kv{display:grid;grid-template-columns:14px 1fr auto;gap:8px 12px;font-size:14px;align-items:center}
+.kv .sw{width:12px;height:12px;border-radius:2px}
+.kv span:last-child{font-family:var(--f-mono);text-align:right}
+.kv .z{color:var(--muted)}
+.facts{display:flex;gap:28px;flex-wrap:wrap}
+.facts div{display:flex;flex-direction:column}
+.facts small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.facts b{font-family:var(--f-mono);font-weight:500;font-size:clamp(18px,2vw,24px)}
+
+details.tablebox{border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+details.tablebox summary{padding:12px 16px;cursor:pointer;font-weight:700;font-size:14px}
+.tscroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:12.5px}
+th,td{padding:7px 10px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700;background:color-mix(in srgb,var(--line) 35%,transparent)}
+td{font-family:var(--f-mono)}
+td:first-child{font-family:var(--f-body);font-weight:600}
+tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transparent)}
+
+/* map */
+.mapgrid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(0,1fr);gap:24px;align-items:start}
+.mapbtn{display:block;padding:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface);position:relative;width:100%}
+.mapbtn img{display:block;width:100%;height:auto}
+.mapbtn .hint{position:absolute;right:10px;bottom:10px;background:var(--deep);color:var(--onDeep);font-size:12px;font-weight:700;padding:6px 10px;border-radius:999px}
+.phase{border-left:3px solid var(--c);padding:6px 0 6px 14px;display:flex;flex-direction:column;gap:6px}
+.phase h3{font-size:18px}
+.phase ul{list-style:none;margin:0;padding:0;font-size:14px;display:flex;flex-direction:column;gap:4px}
+.phase li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dotted var(--line);padding-bottom:3px}
+.phase li b{font-family:var(--f-mono)}
+
+/* security */
+.secroles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.secrole{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.secrole .count{font-family:var(--f-display);font-size:48px;line-height:1;color:var(--bronze)}
+.secrole .row{display:flex;justify-content:space-between;font-size:13px;gap:8px}
+.secrole .row span:last-child{font-family:var(--f-mono)}
+.secrole .row.big{font-weight:700;border-top:1px solid var(--line);padding-top:8px;font-size:14px}
+.secbar{display:flex;height:16px;border-radius:2px;overflow:hidden}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.stepper button{border:0;background:transparent;width:30px;height:28px;font-size:16px}
+.stepper button:hover{background:var(--line)}
+.stepper output{font-family:var(--f-mono);min-width:28px;text-align:center;font-size:14px}
+.totalbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;background:var(--deep);color:var(--onDeep);border-radius:6px;padding:16px 20px}
+.totalbar b{font-family:var(--f-mono);font-size:clamp(20px,2.4vw,28px);font-weight:500}
+.reset{font-size:12px;border:1px solid color-mix(in srgb,var(--onDeep) 30%,transparent);background:transparent;color:var(--onDeep);border-radius:999px;padding:4px 10px}
+
+/* scenario */
+.scen{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.scencard{border:1px solid var(--line);border-radius:6px;padding:24px;background:var(--surface);display:flex;flex-direction:column;gap:14px}
+.scencard.win{border-color:var(--good);box-shadow:inset 0 0 0 1px var(--good)}
+.scencard .tag{align-self:flex-start}
+.scencard .amount{font-family:var(--f-mono);font-size:clamp(24px,3vw,36px);font-weight:500}
+.vbar{height:14px;border-radius:2px;background:color-mix(in srgb,var(--line) 60%,transparent);overflow:hidden;display:flex}
+.vbar div{height:100%;transition:width .9s cubic-bezier(.2,.7,.2,1);width:0}
+.scencard dl{display:grid;grid-template-columns:1fr auto;gap:6px 14px;margin:0;font-size:14px}
+.scencard dd{margin:0;font-family:var(--f-mono);text-align:right}
+.saving{display:flex;flex-wrap:wrap;align-items:center;gap:20px;justify-content:space-between;border-top:1px solid var(--line);padding-top:20px}
+.saving .val{font-family:var(--f-display);font-size:clamp(40px,6vw,72px);color:var(--good);line-height:1}
+.saving small{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* overview */
+.overview{position:fixed;inset:0;z-index:20;background:color-mix(in srgb,var(--bg) 96%,transparent);backdrop-filter:blur(6px);overflow:auto;padding-block:max(24px,env(safe-area-inset-top,0px)) 40px;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.overview .ohead{max-width:1240px;margin:0 auto 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ogrid{max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.ogrid button{text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:6px;min-height:104px}
+.ogrid button:hover{border-color:var(--bronze)}
+.ogrid button.on{border-color:var(--bronze);box-shadow:inset 0 0 0 1px var(--bronze)}
+.ogrid .on-n{font-family:var(--f-mono);font-size:12px;color:var(--bronze)}
+.ogrid b{font-size:14px;line-height:1.3}
+.ogrid small{color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-top:auto}
+
+.lightbox{position:fixed;inset:0;z-index:30;background:rgba(18,14,11,.92);display:flex;flex-direction:column}
+.lightbox .lbbar{display:flex;justify-content:space-between;align-items:center;gap:12px;color:#F3EADF;padding-block:max(12px,env(safe-area-inset-top,0px)) 12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.lightbox .lbbar button{background:transparent;border:1px solid rgba(243,234,223,.35);color:#F3EADF;border-radius:999px;padding:6px 14px;font-weight:600;font-size:13px}
+.lbview{flex:1;overflow:hidden;cursor:grab;touch-action:none;position:relative}
+.lbview img{position:absolute;left:0;top:0;transform-origin:0 0;max-width:none;user-select:none;-webkit-user-drag:none}
+
+.thanks{text-align:left}
+.note{font-size:13px;color:var(--muted)}
+.kbd{font-family:var(--f-mono);font-size:11px;border:1px solid var(--line);border-radius:3px;padding:1px 5px}
+
+@media (max-width:900px){
+  .cover,.opener,.split,.costgrid,.orgwrap,.rolegrid,.mapgrid,.scen{grid-template-columns:minmax(0,1fr)}
+  .cover .photo{aspect-ratio:16/10;max-height:none}
+  .dial{max-width:min(100%,52vh)}
+  .opener .photo{aspect-ratio:16/9}
+  .flow,.cadence,.secroles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .vidgrid{grid-template-columns:minmax(0,1fr)}
+  .flow{row-gap:28px}
+  .inner{justify-content:flex-start}
+  .panel{position:static}
+  .brand span,.hidesm{display:none}
+}
+@media (max-width:520px){
+  .flow,.cadence,.secroles{grid-template-columns:minmax(0,1fr)}
+  .hbar{grid-template-columns:minmax(0,120px) 1fr 40px;font-size:13px}
+  .agenda button{grid-template-columns:48px 1fr}
+  .agenda .go{display:none}
+  .brand b,.crumb{display:none}
+  .topbar{justify-content:space-between}
+  .topbar .brand{margin-right:auto}
+  .progress{gap:2px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tsp-logo" viewBox="0 0 241 105"><g fill="currentColor"><rect x="2" y="10.5" width="3" height="3" fill="#6A8DB5"/><rect x="3" y="24" width="4.5" height="4.5" fill="#FFD503"/><rect x="14" y="19" width="4.5" height="4.5" fill="#8DC63F"/><rect x="14" y="35" width="4.5" height="4.5" fill="#F58220"/><rect x="8.5" y="45" width="4.5" height="4.5" fill="#EF4023"/><path d="M6.9 57.5V74.6H22.1V42.5" fill="none" stroke="currentColor" stroke-width=".8"/><rect x="15.5" y="52.5" width="4.5" height="4.5"/><rect x="9" y="63" width="4.5" height="4.5"/><rect x="16" y="68" width="4.5" height="4.5"/><rect x="29.9" y="6.4" width="15.2" height="68.2" fill="none" stroke="currentColor" stroke-width=".8"/><rect x="33.5" y="11" width="4.5" height="4.5"/><rect x="38.5" y="19.5" width="4.5" height="4.5"/><rect x="32" y="25" width="4.5" height="4.5"/><rect x="37.5" y="34.5" width="4.5" height="4.5"/><rect x="32" y="44.5" width="4.5" height="4.5"/><rect x="38" y="52" width="4.5" height="4.5"/><rect x="32" y="62" width="4.5" height="4.5"/><rect x="38.5" y="67.5" width="4.5" height="4.5"/><rect x="54.8" y="6" width="1.7" height="69"/><rect x="235.8" y="6" width="1.7" height="69"/><text x="67.5" y="75" font-family="Arial,Helvetica,'Liberation Sans',sans-serif" font-weight="700" font-size="93" textLength="155" lengthAdjust="spacingAndGlyphs">TSP</text><text x="62" y="100.5" font-family="Arial,Helvetica,'Liberation Sans',sans-serif" font-weight="700" font-size="15" textLength="171.5" lengthAdjust="spacingAndGlyphs">Total Solution Provider</text></g></symbol></svg>
+<div class="app">
+  <header class="topbar">
+    <div class="brand"><svg class="toplogo" viewBox="0 0 241 105" role="img" aria-label="TSP"><use href="#tsp-logo"/></svg><b>TAKSİM 360</b><span>Bütünsel Tesis Yönetimi</span></div>
+    <div class="crumb" id="crumb"></div>
+    <button class="iconbtn" id="openOverview" aria-label="Tüm slaytlar">▦ <span class="hidesm">Slaytlar</span></button>
+    <button class="iconbtn" id="fsBtn" aria-label="Tam ekran" title="Tam ekran (F)"><span id="fsIcon">⛶</span> <span class="hidesm" id="fsLabel">Tam ekran</span></button>
+  </header>
+
+  <main class="stage" id="stage">
+
+  <!-- 1 COVER -->
+  <section class="slide" data-sec="Kapak" data-title="Bütünsel Tesis Yönetimi Teklifi">
+    <div class="inner"><div class="cover">
+      <figure class="dial" id="dial">
+        <div class="dial-stage" id="dialStage" role="img" aria-label="Taksim 360 panoraması, pusula kadranı üzerinde dönüyor">
+          <div class="dial-rot" id="dialRot">
+            <svg class="dial-ring" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="196" class="bezel"/><g id="dialTicks"></g></svg>
+            <img class="dial-pano" src="img/pano360.jpg" alt="" draggable="false">
+          </div>
+          <svg class="dial-fixed" viewBox="0 0 400 400" aria-hidden="true"><path d="M200 26 L190 6 H210 Z" class="lubber"/><line x1="200" y1="26" x2="200" y2="52" class="lubber-line"/></svg>
+        </div>
+        <figcaption class="dial-read">
+          <div class="dial-deg"><b id="dialDeg">0°</b><span id="dialDir">K · Kuzey</span></div>
+        </figcaption>
+        <p class="dial-tag">Taksim360’ta bir yaşam, üç zaman…</p>
+        <button class="iconbtn dial-btn" id="dialPlay" aria-pressed="true">❚❚ Durdur</button>
+      </figure>
+      <div style="display:flex;flex-direction:column;gap:26px">
+        <svg class="t360" viewBox="0 0 240 72" role="img" aria-label="Taksim 360 – Yaşam, İş ve Eğlence"><g fill="currentColor"><path d="M32.5443 62.5V62.79C31.8643 62.87 31.7343 62.99 31.3543 63.59C30.9143 64.3 30.5843 64.85 30.1043 65.74C29.9743 66 29.9443 66.12 29.9443 66.38V67.73C29.9443 68.58 30.0243 68.65 30.9343 68.71V69H28.0343V68.71C28.9143 68.65 29.0043 68.58 29.0043 67.73V66.44C29.0043 66.23 28.9643 66.13 28.8043 65.85C28.4743 65.25 28.1043 64.59 27.5543 63.64C27.1543 62.96 27.0343 62.85 26.4443 62.79V62.5H28.9243V62.79C28.2143 62.89 28.2443 63 28.4243 63.34C28.8343 64.12 29.3043 64.93 29.7343 65.68C30.0843 65.03 30.6243 64.06 30.8943 63.45C31.1143 62.97 31.0843 62.88 30.3143 62.79V62.5H32.5443Z" /><path d="M41.7266 69H39.1966V68.71C39.8166 68.63 39.8966 68.54 39.7666 68.14C39.6466 67.76 39.4566 67.25 39.2466 66.67H37.1466C36.9966 67.1 36.8566 67.51 36.7266 67.92C36.5266 68.53 36.5966 68.63 37.3466 68.71V69H35.1566V68.71C35.8066 68.62 35.9366 68.55 36.2866 67.67L38.3466 62.45L38.6966 62.35C39.3166 64.07 39.9866 65.95 40.6266 67.68C40.9366 68.54 41.0766 68.64 41.7266 68.71V69ZM39.0966 66.23L38.2466 63.75H38.2166C37.9066 64.58 37.6066 65.42 37.3066 66.23H39.0966Z" /><path d="M49.3711 63.99L49.0811 64.04C48.9011 63.41 48.6111 62.7 47.7511 62.7C47.0411 62.7 46.6811 63.21 46.6811 63.75C46.6811 64.46 47.1211 64.81 47.9511 65.21C48.7611 65.6 49.6611 66.1 49.6611 67.22C49.6611 68.14 49.0211 68.86 48.0411 69.06L47.8811 69.29C47.7711 69.45 47.7911 69.52 47.9511 69.68C48.2211 69.96 48.3411 70.14 48.3411 70.37C48.3411 70.79 47.8911 71.16 47.1911 71.37L47.0711 71.11C47.4711 70.93 47.6711 70.72 47.6811 70.52C47.6811 70.37 47.5611 70.25 47.4411 70.14C47.1911 69.91 47.1211 69.76 47.3311 69.49L47.6111 69.13C47.5511 69.15 47.4911 69.15 47.4311 69.15C47.0511 69.14 46.6711 69.07 46.4111 68.99C46.1411 68.91 45.9811 68.83 45.8811 68.78C45.8011 68.57 45.6711 67.73 45.6111 67.21L45.9011 67.13C46.0711 67.74 46.5511 68.78 47.6311 68.78C48.3211 68.78 48.7611 68.32 48.7611 67.61C48.7611 66.85 48.2011 66.49 47.4911 66.12C46.8011 65.77 45.8311 65.25 45.8311 64.15C45.8311 63.18 46.6211 62.35 47.9211 62.35C48.4111 62.35 48.8511 62.48 49.2011 62.59C49.2411 62.95 49.2911 63.36 49.3711 63.99Z" /><path d="M60.1454 69H57.6154V68.71C58.2354 68.63 58.3154 68.54 58.1854 68.14C58.0654 67.76 57.8754 67.25 57.6654 66.67H55.5654C55.4154 67.1 55.2754 67.51 55.1454 67.92C54.9454 68.53 55.0154 68.63 55.7654 68.71V69H53.5754V68.71C54.2254 68.62 54.3554 68.55 54.7054 67.67L56.7654 62.45L57.1154 62.35C57.7354 64.07 58.4054 65.95 59.0454 67.68C59.3554 68.54 59.4954 68.64 60.1454 68.71V69ZM57.5154 66.23L56.6653 63.75H56.6354C56.3254 64.58 56.0254 65.42 55.7254 66.23H57.5154Z" /><path d="M72.2887 69H69.5987V68.71C70.3987 68.63 70.4387 68.57 70.4287 67.54L70.3987 63.5H70.3587L67.9587 68.93H67.7487L65.5487 63.64H65.5187L65.3787 66.44C65.3387 67.26 65.3387 67.71 65.3487 68.09C65.3687 68.56 65.5987 68.64 66.2687 68.7V69H63.9287V68.7C64.4987 68.64 64.6987 68.52 64.7687 68.11C64.8187 67.77 64.8887 67.32 64.9587 66.27L65.1087 64.21C65.1987 62.94 65.1387 62.88 64.2387 62.79V62.5H65.9587L68.1687 67.39L70.4187 62.5H72.1787V62.79C71.3087 62.88 71.2487 62.91 71.2787 63.9L71.3787 67.53C71.3987 68.57 71.4387 68.63 72.2887 68.71V69Z" /><path d="M76.8752 67.65C77.2652 67.65 77.8352 68.06 77.8352 68.76C77.8352 69.57 77.1152 70.01 76.4552 70.2L76.3452 69.9C76.8552 69.69 77.1452 69.42 77.1452 69.03C77.1452 68.68 76.8652 68.44 76.4952 68.35C76.4452 68.34 76.3652 68.26 76.3652 68.08C76.3652 67.82 76.6152 67.65 76.8752 67.65Z" /><path d="M90.2953 69H87.5853V68.71C88.3853 68.65 88.4753 68.59 88.4753 67.74V63.77C88.4753 62.92 88.3853 62.86 87.5853 62.79V62.5H90.2953V62.79C89.4953 62.86 89.4053 62.92 89.4053 63.77V67.74C89.4053 68.59 89.4953 68.65 90.2953 68.71V69ZM88.9453 60.87C89.2553 60.87 89.4953 61.12 89.4953 61.43C89.4953 61.73 89.2553 61.98 88.9453 61.98C88.6353 61.98 88.3953 61.73 88.3953 61.43C88.3953 61.12 88.6353 60.87 88.9453 60.87Z" /><path d="M98.1821 63.99L97.8921 64.04C97.7121 63.41 97.4221 62.7 96.5621 62.7C95.8521 62.7 95.4921 63.21 95.4921 63.75C95.4921 64.46 95.9321 64.81 96.7621 65.21C97.5721 65.6 98.4721 66.1 98.4721 67.22C98.4721 68.14 97.8321 68.86 96.8521 69.06L96.6921 69.29C96.5821 69.45 96.6021 69.52 96.7621 69.68C97.0321 69.96 97.1521 70.14 97.1521 70.37C97.1521 70.79 96.7021 71.16 96.0021 71.37L95.8821 71.11C96.2821 70.93 96.4821 70.72 96.4921 70.52C96.4921 70.37 96.3721 70.25 96.2521 70.14C96.0021 69.91 95.9321 69.76 96.1421 69.49L96.4221 69.13C96.3621 69.15 96.3021 69.15 96.2421 69.15C95.8621 69.14 95.4821 69.07 95.2221 68.99C94.9521 68.91 94.7921 68.83 94.6921 68.78C94.6121 68.57 94.4821 67.73 94.4221 67.21L94.7121 67.13C94.8821 67.74 95.3621 68.78 96.4421 68.78C97.1321 68.78 97.5721 68.32 97.5721 67.61C97.5721 66.85 97.0121 66.49 96.3021 66.12C95.6121 65.77 94.6421 65.25 94.6421 64.15C94.6421 63.18 95.4321 62.35 96.7321 62.35C97.2221 62.35 97.6621 62.48 98.0121 62.59C98.0521 62.95 98.1021 63.36 98.1821 63.99Z" /><path d="M114.692 62.5V62.8C114.012 62.87 113.872 62.97 113.492 63.88C113.212 64.55 112.182 67.04 111.422 69.1H111.082C110.412 67.27 109.562 65.07 109.022 63.7C108.722 62.95 108.562 62.86 107.962 62.8V62.5H110.512V62.8C109.792 62.88 109.772 62.96 109.922 63.39C110.192 64.12 110.932 66.07 111.542 67.65H111.562C112.082 66.36 112.772 64.56 113.082 63.58C113.282 62.98 113.232 62.89 112.422 62.8V62.5H114.692Z" /><path d="M123.393 67.36L123.693 67.41C123.643 67.76 123.433 68.69 123.353 69H118.473V68.71C119.373 68.64 119.463 68.56 119.463 67.74V63.79C119.463 62.9 119.373 62.86 118.613 62.79V62.5H123.113C123.113 62.74 123.163 63.42 123.203 63.95L122.893 64C122.803 63.59 122.693 63.35 122.563 63.15C122.413 62.93 122.143 62.86 121.453 62.86H120.743C120.423 62.86 120.393 62.89 120.393 63.19V65.44H121.293C122.183 65.44 122.253 65.36 122.373 64.69H122.673V66.62H122.373C122.243 65.91 122.163 65.85 121.293 65.85H120.393V67.7C120.393 68.17 120.453 68.4 120.633 68.52C120.823 68.64 121.173 68.64 121.653 68.64C122.373 68.64 122.663 68.56 122.883 68.31C123.063 68.1 123.243 67.76 123.393 67.36Z" /><path d="M138.042 67.36L138.342 67.41C138.292 67.76 138.082 68.69 138.002 69H133.122V68.71C134.022 68.64 134.112 68.56 134.112 67.74V63.79C134.112 62.9 134.022 62.86 133.262 62.79V62.5H137.762C137.762 62.74 137.812 63.42 137.852 63.95L137.542 64C137.452 63.59 137.342 63.35 137.212 63.15C137.062 62.93 136.792 62.86 136.102 62.86H135.392C135.072 62.86 135.042 62.89 135.042 63.19V65.44H135.942C136.832 65.44 136.902 65.36 137.022 64.69H137.322V66.62H137.022C136.892 65.91 136.812 65.85 135.942 65.85H135.042V67.7C135.042 68.17 135.102 68.4 135.282 68.52C135.472 68.64 135.822 68.64 136.302 68.64C137.022 68.64 137.312 68.56 137.532 68.31C137.712 68.1 137.892 67.76 138.042 67.36Z" /><path d="M148.836 65.97V66.26C148.256 66.35 148.206 66.4 148.206 67V67.84C148.206 68.19 148.216 68.51 148.276 68.78C147.666 68.93 146.826 69.15 146.036 69.15C143.806 69.15 142.336 67.79 142.336 65.8C142.336 63.49 144.196 62.35 146.176 62.35C147.016 62.35 147.776 62.57 148.106 62.64C148.136 62.98 148.186 63.53 148.266 64.22L147.966 64.28C147.726 63.08 146.976 62.72 146.016 62.72C144.556 62.72 143.446 63.84 143.446 65.67C143.446 67.13 144.276 68.79 146.156 68.79C146.466 68.79 146.766 68.73 146.966 68.62C147.156 68.52 147.266 68.38 147.266 67.99V67.12C147.266 66.4 147.206 66.34 146.216 66.26V65.97H148.836ZM146.716 60.75H147.016C147.006 61.59 146.526 61.97 145.826 61.97C145.126 61.97 144.646 61.59 144.636 60.75H144.936C145.026 61.11 145.296 61.37 145.826 61.37C146.356 61.37 146.626 61.12 146.716 60.75Z" /><path d="M157.393 67.34L157.703 67.41C157.643 67.74 157.433 68.7 157.343 69H152.753V68.71C153.593 68.65 153.683 68.58 153.683 67.73V63.76C153.683 62.91 153.613 62.86 152.803 62.79V62.5H155.493V62.79C154.713 62.85 154.613 62.9 154.613 63.76V67.7C154.613 68.23 154.663 68.42 154.853 68.52C155.043 68.63 155.373 68.64 155.773 68.64C156.303 68.64 156.643 68.59 156.873 68.33C157.053 68.13 157.233 67.81 157.393 67.34Z" /><path d="M166.374 67.36L166.674 67.41C166.624 67.76 166.414 68.69 166.334 69H161.454V68.71C162.354 68.64 162.444 68.56 162.444 67.74V63.79C162.444 62.9 162.354 62.86 161.594 62.79V62.5H166.094C166.094 62.74 166.144 63.42 166.184 63.95L165.874 64C165.784 63.59 165.674 63.35 165.544 63.15C165.394 62.93 165.124 62.86 164.434 62.86H163.724C163.404 62.86 163.374 62.89 163.374 63.19V65.44H164.274C165.164 65.44 165.234 65.36 165.354 64.69H165.654V66.62H165.354C165.224 65.91 165.144 65.85 164.274 65.85H163.374V67.7C163.374 68.17 163.434 68.4 163.614 68.52C163.804 68.64 164.154 68.64 164.634 68.64C165.354 68.64 165.644 68.56 165.864 68.31C166.044 68.1 166.224 67.76 166.374 67.36Z" /><path d="M177.427 62.5V62.79C176.867 62.82 176.637 62.95 176.587 63.39C176.557 63.7 176.527 64.15 176.527 65.07V69.09H176.187L171.947 63.9H171.927V66.36C171.927 67.27 171.957 67.75 171.987 68.04C172.037 68.53 172.257 68.67 172.947 68.71V69H170.567V68.71C171.137 68.67 171.387 68.54 171.437 68.06C171.467 67.75 171.507 67.27 171.507 66.36V64.18C171.507 63.47 171.487 63.4 171.297 63.16C171.097 62.91 170.887 62.83 170.417 62.79V62.5H171.967L176.077 67.4H176.107V65.07C176.107 64.16 176.067 63.7 176.037 63.41C175.987 62.97 175.757 62.83 175.047 62.79V62.5H177.427Z" /><path d="M187.09 67.23L187.39 67.34C187.25 67.8 187 68.55 186.82 68.88C186.54 68.95 185.69 69.15 184.98 69.15C182.46 69.15 181.36 67.42 181.36 65.84C181.36 63.74 182.97 62.35 185.24 62.35C186.05 62.35 186.74 62.57 187.01 62.62C187.09 63.18 187.16 63.6 187.22 64.15L186.91 64.22C186.64 63.14 186.01 62.73 184.98 62.73C183.35 62.73 182.48 64.13 182.48 65.64C182.48 67.5 183.55 68.77 185.05 68.77C186.04 68.77 186.58 68.22 187.09 67.23Z" /><path d="M196.15 67.36L196.45 67.41C196.4 67.76 196.19 68.69 196.11 69H191.23V68.71C192.13 68.64 192.22 68.56 192.22 67.74V63.79C192.22 62.9 192.13 62.86 191.37 62.79V62.5H195.87C195.87 62.74 195.92 63.42 195.96 63.95L195.65 64C195.56 63.59 195.45 63.35 195.32 63.15C195.17 62.93 194.9 62.86 194.21 62.86H193.5C193.18 62.86 193.15 62.89 193.15 63.19V65.44H194.05C194.94 65.44 195.01 65.36 195.13 64.69H195.43V66.62H195.13C195 65.91 194.92 65.85 194.05 65.85H193.15V67.7C193.15 68.17 193.21 68.4 193.39 68.52C193.58 68.64 193.93 68.64 194.41 68.64C195.13 68.64 195.42 68.56 195.64 68.31C195.82 68.1 196 67.76 196.15 67.36Z" /><path d="M201.163 69.12C200.823 69.12 200.573 68.88 200.573 68.51C200.573 68.16 200.823 67.91 201.163 67.91C201.503 67.91 201.753 68.16 201.753 68.51C201.753 68.88 201.503 69.12 201.163 69.12Z" /><path d="M206.847 69.12C206.507 69.12 206.257 68.88 206.257 68.51C206.257 68.16 206.507 67.91 206.847 67.91C207.187 67.91 207.437 68.16 207.437 68.51C207.437 68.88 207.187 69.12 206.847 69.12Z" /><path d="M212.531 69.12C212.191 69.12 211.941 68.88 211.941 68.51C211.941 68.16 212.191 67.91 212.531 67.91C212.871 67.91 213.121 68.16 213.121 68.51C213.121 68.88 212.871 69.12 212.531 69.12Z" /><path d="M183.58 21.9195C181.55 21.8657 179.537 22.3069 177.716 23.2051C175.895 24.1032 174.32 25.4313 173.126 27.0746C173.628 18.1247 176.85 14.0436 183.58 14.0436C188.807 14.0436 191.742 15.8336 192.029 19.3419L192.1 19.7715H196.754L196.683 19.2703C196.253 14.8312 192.601 10.1772 183.508 10.1772C173.914 10.1772 168.687 16.9792 168.687 29.2942C168.687 40.4636 173.699 46.12 183.508 46.12C192.029 46.12 197.542 41.3944 197.542 34.0913C197.613 26.5734 192.243 21.9195 183.58 21.9195ZM183.58 42.182C176.492 42.182 173.986 37.7429 173.986 33.9481C173.986 32.5877 174.415 25.929 183.58 25.929C189.165 25.929 192.959 29.2226 192.959 34.0913C192.959 38.9601 189.165 42.182 183.58 42.182Z" /><path d="M160.095 26.7882C161.528 26.2938 162.773 25.3674 163.658 24.1364C164.543 22.9055 165.024 21.4306 165.036 19.9147C165.036 12.7548 158.52 10.1772 152.434 10.1772C143.842 10.1772 138.616 14.5448 138.473 21.9195V22.4207H143.126V21.9195C143.126 16.7644 146.277 14.1152 152.434 14.1152C157.446 14.1152 160.382 16.2632 160.382 19.9147C160.382 23.5663 157.947 25.1414 152.076 25.1414H149.212V29.0794H152.721C159.093 29.0794 161.814 31.0126 161.814 35.4517C161.814 37.9577 160.597 42.1104 152.649 42.1104C145.704 42.1104 142.554 39.6044 142.339 33.8765V33.4469H137.685V33.9481C137.757 41.8956 142.697 46.0484 152.148 46.0484C161.456 46.0484 166.539 42.2536 166.539 35.3085C166.396 31.1558 163.962 27.8622 160.095 26.7882Z" /><path d="M214.869 10.1772C205.131 10.1772 199.761 16.5496 199.761 28.1486C199.761 39.7476 205.131 46.0484 214.869 46.0484C224.606 46.0484 229.976 39.676 229.976 28.1486C229.976 16.6212 224.606 10.1772 214.869 10.1772ZM214.869 42.182C207.852 42.182 204.415 37.5997 204.415 28.2202C204.415 18.8407 207.852 14.1152 214.869 14.1152C221.885 14.1152 225.322 18.6975 225.322 28.2202C225.322 37.5997 221.885 42.182 214.869 42.182Z" /><path d="M10.0234 15.0461H14.6057V46.2633H19.1164V15.0461H23.6272V10.6069H10.0234V15.0461Z" /><path d="M54.3433 28.5781H49.6893L59.1404 10.6068H53.9137L49.0449 20.0578V10.5352H44.5342V46.1915H49.0449V32.9457H53.9137V46.1915H58.6392V32.9457L54.3433 28.5781Z" /><path d="M27.1361 46.3349H31.6468V36.8838H36.1575V46.3349H40.6683V10.6069H27.0645V46.3349H27.1361ZM36.2291 14.9745V32.4446H31.7184V14.9745H36.2291Z" /><path d="M62.6494 10.6069V30.3683H71.4561V41.2513H67.0169V34.8074H62.6494V41.2513L67.0169 46.1917V46.1201H71.3845V46.1917H75.8236V30.3683L71.3845 25.4995H67.0169V15.4757H71.4561V21.9912H75.8236V15.4757L71.4561 10.6069H62.6494Z" /><path d="M87.1358 14.9745H90.0714V10.6069H79.6895V14.9745H82.6251V41.7525H79.6895V46.1917H90.0714V41.7525H87.1358V14.9745Z" /><path d="M87.1357 0.940918H82.625V7.74283H87.1357V0.940918Z" /><path d="M116.635 10.6069H110.334L108.043 13.3993L105.179 10.6069H93.8662V11.3229V15.6905V46.1917H98.4486V15.6905H105.823V46.1917H110.334V15.6905H117.279V46.1917H121.79V15.6905L116.635 10.6069Z" /><path d="M128.305 0.940984H90.0716V5.30853H127.446V51.0603H4.58234V5.30853H79.6897V0.940984H0V55.4995H240V0.869385L128.305 0.940984ZM235.489 51.0603H131.957V5.30853H235.489V51.0603Z" /></g></svg>
+        <h1>Bütünsel Tesis Yönetimi</h1>
+        <p class="lead muted">Teklif ve Değerlendirmeler</p>
+        <div class="tsplogo"><svg class="" viewBox="0 0 241 105" role="img" aria-label="TSP Total Solution Provider"><use href="#tsp-logo"/></svg></div>
+        <p class="note">Gezinmek için <span class="kbd">←</span> <span class="kbd">→</span> tuşlarını, kaydırmayı veya alttaki çubuğu kullanın. Tam ekran için <span class="kbd">F</span>.</p>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 2 AGENDA -->
+  <section class="slide" data-sec="İçindekiler" data-title="İçindekiler">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">İçindekiler</div><h2>Sunum akışı</h2></div>
+      <nav class="agenda">
+        <button data-go="giris"><span class="n">01</span><span class="t">Giriş</span><span class="go">Git →</span></button>
+        <button data-go="btm"><span class="n">02</span><span class="t">Bütünsel Tesis Yönetimi Değerlendirme ve Teklifimiz</span><span class="go">Git →</span></button>
+        <button data-go="guvenlik"><span class="n">03</span><span class="t">Özel Güvenlik Hizmet Maliyet Teklifimiz</span><span class="go">Git →</span></button>
+        <button data-go="danismanlik"><span class="n">04</span><span class="t">Yönetim Danışmanlık ve Hizmet Teklifimiz</span><span class="go">Git →</span></button>
+        <button data-go="site"><span class="n">05</span><span class="t">Site Yönetimi Bünyesinde Personellerin Maliyet Analizi</span><span class="go">Git →</span></button>
+        <button data-go="sonuc"><span class="n">06</span><span class="t">Sonuç</span><span class="go">Git →</span></button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 3 GİRİŞ -->
+  <section class="slide" id="giris" data-sec="01 Giriş" data-title="Giriş">
+    <div class="inner">
+      <div class="opener">
+        <div style="display:flex;flex-direction:column;gap:14px"><div class="secnum">01</div><h2>Giriş</h2></div>
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <p class="lead">GAP İnşaat’ın Taksim 360 Projesi’nin site yönetimini ve personel organizasyon şemasını, ulusal ve uluslararası projelerde edindiğimiz tecrübelerle incelemiş bulunmaktayız. Bu sunumumuzda, değerlendirmelerimizin yanı sıra olması gerektiğine inandığımız bütünsel tesis yönetim organizasyonunu ve teklifimizi sizlerle paylaşıyoruz.</p>
+          <div class="chips"><span class="chip">Avukatlık</span><span class="chip">Mali müşavirlik</span><span class="chip">Bordrolama</span><span class="chip">İnsan kaynakları</span><span class="chip">Satın alma</span></div>
+          <p class="muted">TSP Yapı Yönetim; yönetim danışmanlığı hizmeti adı altında avukatlık, mali müşavirlik, bordrolama, insan kaynakları ve satın alma hizmetlerini tek çatı altında sizlere sunmaktadır.</p>
+        </div>
+      </div>
+      <div class="cols">
+        <div class="card"><span class="pill">Mevzuat</span><h3>Kanuna uygun yönetim</h3><p class="muted">Yönetim Kurulunun Kat Mülkiyeti Kanunu ve Yönetim Planı doğrultusunda hareket etmesini sağlar, genel kurul süreçlerini yönetir ve aylık toplantılara katılım sağlar.</p></div>
+        <div class="card"><span class="pill">Danışmanlık</span><h3>Hukuki ve mali rehberlik</h3><p class="muted">Yönetim ve Denetim Kuruluna hukuki ve mali danışmanlık ve rehberlik hizmeti sunar.</p></div>
+        <div class="card"><span class="pill">Raporlama</span><h3>Aylık, 3 aylık, yıllık</h3><p class="muted">Yönetim Kuruluna aylık, 3 aylık ve yıllık raporları hazırlar ve sunar.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KONUM -->
+  <section class="slide" data-sec="01 Giriş" data-title="Konum">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">Life · Business · Leisure</div><h2>Konum</h2><p class="muted">Taksim 360; Taksim Meydanı, Nişantaşı, Galata ve Boğaz hattının kesişiminde, İstanbul'un merkezinde yer alır.</p></div>
+      <div class="mapgrid">
+        <button class="mapbtn" style="max-width:min(100%,calc(66vh * 1.1));justify-self:center" data-zoom="img/konum3d.jpg" data-cap="Taksim 360 konum haritası"><img src="img/konum3d.jpg" alt="Taksim 360'ın Taksim Meydanı, Galata Kulesi, Dolmabahçe ve tarihi yarımadaya göre konumunu gösteren 3D İstanbul haritası"><span class="hint">⤢ Büyüt</span></button>
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <div class="phase" style="--c:var(--bronze)"><h3>Yakın çevre</h3><ul><li>Taksim Meydanı</li><li>Atatürk Kültür Merkezi</li><li>Nişantaşı</li><li>Galata Kulesi</li><li>Dolmabahçe Sarayı</li></ul></div>
+          <div class="phase" style="--c:var(--c2)"><h3>Boğaz hattı</h3><ul><li>İstanbul Modern</li><li>Galataport</li><li>Kız Kulesi · Üsküdar</li></ul></div>
+          <div class="phase" style="--c:var(--c4)"><h3>Ulaşım</h3><ul><li>Taksim nostaljik tramvay</li><li>Marmaray</li><li>Avrasya Tüneli</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TANITIM VİDEOSU -->
+  <section class="slide" data-sec="01 Giriş" data-title="Projeyi tanıyalım">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">Tanıtım filmi · 2:35</div><h2>Projeyi tanıyalım</h2><p class="muted">Videodaki sahneler teklifimizin dayandığı saha koşullarını gösteriyor. Notlara tıklayarak ilgili sahneye geçebilirsiniz.</p></div>
+      <div class="vidgrid">
+        <div class="vidbox"><video id="promo" controls playsinline preload="none" poster="img/tanitim-poster.jpg"><source src="img/tanitim.mp4" type="video/mp4">Tarayıcınız bu videoyu oynatamıyor.</video></div>
+        <ol class="cues" id="cues">
+          <li><button data-t="50" data-end="60"><span class="tc">0:50</span><b>Sokak seviyesinde mağazalar</b><span>Ticari yoğunluk → 42 kişilik güvenlik kadrosu, 1. Faza 5 yeni nokta ve devriye</span></button></li>
+          <li><button data-t="60" data-end="70"><span class="tc">1:00</span><b>Dar sokaklar, yaya trafiği</b><span>Elektrikli, açık kasa çöp toplama aracı; dar sokaklara ve yaya trafiğine uygun</span></button></li>
+          <li><button data-t="125" data-end="145"><span class="tc">2:05</span><b>Kuş bakışı yerleşke</b><span>96.000 m² alan → 1. ve 2. fazın birlikte planlandığı temizlik senaryosu</span></button></li>
+          <li><button data-t="145" data-end="156"><span class="tc">2:25</span><b>Gece de yaşayan yapı</b><span>7/24 kesintisiz kontrol → Saha Sorumlusu ve Çağrı Merkezi</span></button></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 BTM opener -->
+  <section class="slide" id="btm" data-sec="02 Bütünsel Tesis Yönetimi" data-title="Teklifin kapsamı">
+    <div class="inner">
+      <div class="opener">
+        <div style="display:flex;flex-direction:column;gap:14px"><div class="secnum">02</div><h2>Bütünsel Tesis Yönetimi Değerlendirme ve Teklifimiz</h2></div>
+        <ul class="points">
+          <li><p>Tüm personelin <b>TSP Yapı Yönetimi bünyesinde</b> yer alacağı varsayılmıştır. Saha sorumlusu, muhasebe ve çağrı merkezi görevleri belirtilen şekilde yürütülecek; personel ve merkez giderleri buna göre maliyetlendirilmiştir.</p></li>
+          <li><p>Aidat takibi ve yönetim organizasyonunun yürütülmesi de öngörülmüş ve bütçelendirilmiştir.</p></li>
+          <li><p>Temizlik hizmeti <b>96.000 m²</b>’lik alanda verileceği için çöp toplamada <b>elektrikli, açık kasa bir kamyonet</b> (12 aylık finansman maliyetiyle) teklife dahildir. Araç, dar sokaklar ve yaya trafiği göz önünde bulundurularak seçilmiştir.</p></li>
+          <li><p>Temizlik senaryosu 1. ve 2. fazlar birlikte ele alınarak kurgulanmış, görev noktaları vaziyet planı üzerinde konumlandırılmıştır.</p></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 ORG CHART -->
+  <section class="slide" data-sec="02 Bütünsel Tesis Yönetimi" data-title="Organizasyon şeması">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">Toplu Yapı Site Yönetimi</div><h2>Organizasyon şeması</h2><p class="muted">Bir birime tıklayarak görev tanımını ve teklifteki karşılığını görün.</p></div>
+      <div class="orgwrap">
+        <div class="org">
+          <ul class="tree">
+            <li>
+              <div class="orgtop">
+                <div class="support">
+                  <button class="node" data-n="hukuk">Hukuk</button>
+                  <button class="node" data-n="ik">İnsan Kaynakları</button>
+                  <button class="node" data-n="muhasebe">Muhasebe</button>
+                  <button class="node" data-n="satin">Satın Alma</button>
+                </div>
+                <button class="node" data-n="tsp">TSP Merkez</button>
+              </div>
+              <ul><li>
+                <button class="node" data-n="proje">Proje Sorumlusu<small>1 kişi</small></button>
+                <ul>
+                  <li>
+                    <button class="node" data-n="saha">Saha Sorumlusu<small>2 kişi</small></button>
+                    <ul>
+                      <li><button class="node" data-n="teknik">Teknik<small>5</small></button></li>
+                      <li><button class="node" data-n="temizlik">Temizlik<small>20</small></button></li>
+                      <li><button class="node" data-n="guvenlik">Güvenlik<small>42</small></button></li>
+                      <li><button class="node" data-n="resepsiyon">Resepsiyon<small>2</small></button></li>
+                    </ul>
+                  </li>
+                  <li>
+                    <button class="node" data-n="halkla">Halkla İlişkiler<small>1 kişi</small></button>
+                    <ul><li><button class="node" data-n="cagri">Çağrı Merkezi<small>3</small></button></li></ul>
+                  </li>
+                </ul>
+              </li></ul>
+            </li>
+          </ul>
+        </div>
+        <aside class="panel" id="orgPanel" aria-live="polite"></aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 SAHA SORUMLUSU -->
+  <section class="slide" data-sec="02 Bütünsel Tesis Yönetimi" data-title="Saha (Operasyon) Sorumlusu">
+    <div class="inner"><div class="split">
+      <div class="head" style="gap:18px">
+        <div class="eyebrow">Operasyon</div>
+        <h2>Saha (Operasyon) Sorumlusu</h2>
+        <p class="lead">Bütünsel Tesis Yönetimi kapsamında; Proje Sorumlumuzun yanı sıra saha ve operasyon süreçlerini aktif ve sürekli kontrol altında tutması amacıyla yardımcı konumunda bir "Saha Sorumlusu" görevlendirilecektir.</p>
+        <p class="muted">Taksim 360 projesi; sosyal, ekonomik ve ticari konumu gereği 7/24 kesintisiz kontrol altında bulundurulmalıdır.</p>
+        <p class="muted">Teknik ve temizlik şefi pozisyonları Saha Sorumlusuna bağlanarak; personelin saha görevlendirmelerini, iş tanımlarını, vardiya ve iş planlarını takip edecek güçlü bir denetim mekanizması kurulmuş olacaktır.</p>
+        <img class="wimg" src="img/changemgmt.jpg" alt="Değişim yönetimi kavramları: Change Management, Service, Standard, Procedures, Plan, Process, Infrastructure, Configuration">
+      </div>
+      <div class="card" style="gap:18px">
+        <h3>Saha Sorumlusuna bağlanan denetim</h3>
+        <div class="cols" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+          <div class="chip" style="border-radius:4px;text-align:center">Teknik şef</div>
+          <div class="chip" style="border-radius:4px;text-align:center">Temizlik şefi</div>
+        </div>
+        <ul class="points">
+          <li><p>Personelin saha görevlendirmeleri</p></li>
+          <li><p>İş tanımları</p></li>
+          <li><p>Vardiya ve iş planlarının takibi</p></li>
+        </ul>
+        <div class="facts"><div><small>Kadro</small><b>2 kişi</b></div><div><small>Kişi başı aylık</small><b>175.598,05 ₺</b></div><div><small>Kapsam</small><b>7/24</b></div></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 7 ÇAĞRI MERKEZİ -->
+  <section class="slide" data-sec="02 Bütünsel Tesis Yönetimi" data-title="Çağrı Merkezi">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">Call Center · 3 personel</div><h2>Çağrı Merkezi</h2>
+        <p class="lead">Taksim 360 Projesi'nin 7/24 yaşayan bir yapıya sahip olması sebebiyle; tüm şikâyet, öneri ve talepleri hızla toplayabilmek, kurumsal bir hafıza oluşturmak ve hızlı çözümler sunabilmek adına bir Çağrı Merkezi kurulacaktır. Bu birim, Halkla İlişkiler ve Resepsiyon görevlileri ile koordineli, doğrudan Proje Müdürü’ne bağlı olarak çalışacaktır.</p>
+        <p class="muted">Söz konusu görev dağılımı, organizasyon şemasında detaylı bir şekilde yer almaktadır. Çağrı merkezinin temel işlevi; site sakinlerinin güvenlik, teknik ve temizlik gibi operasyonel birimlere çok daha hızlı ve kolay ulaşmasını sağlamaktır.</p>
+        <p class="muted">Birim, gelen şikâyet ve talepleri ilgili departmanlara aktardıktan sonra işin tamamlanma durumunu ve süresini takip edecek; müşteri memnuniyetini sorgulayarak personelin performansını denetlemek adına geri bildirim süreçlerini yönetecektir.</p></div>
+      <div class="flow">
+        <div><b>Talebi al</b><span>Site sakininden gelen şikâyet, öneri veya talep kayda alınır.</span></div>
+        <div><b>Birime aktar</b><span>Güvenlik, teknik veya temizlik birimine hızla iletilir.</span></div>
+        <div><b>Takip et</b><span>İşin tamamlanma durumu ve süresi izlenir.</span></div>
+        <div><b>Geri bildirim</b><span>Müşteri memnuniyeti sorulur, personel performansı denetlenir.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 MUHASEBE -->
+  <section class="slide" data-sec="02 Bütünsel Tesis Yönetimi" data-title="Muhasebe">
+    <div class="inner">
+      <div class="split" style="align-items:start">
+        <div class="head" style="gap:16px"><div class="eyebrow">TSP Merkez · Apsiyon entegrasyonu</div><h2>Muhasebe</h2>
+          <p class="lead">Taksim 360 Toplu Yapı Site Yönetimi'nin muhasebe kayıtları TSP Merkez tarafından tutulacaktır. Apsiyon Yönetim Sistemi ile entegrasyonu tamamlanmış olan bu online altyapı sayesinde, tüm site sakinleri işlemlerini doğrudan mobil uygulama üzerinden gerçekleştirebilecektir.</p>
+          <p class="muted">Aidat tahakkukları, enerji gider paylaşımları ve tahsilat takipleri TSP Merkez tarafından organize edilecektir. Güvenlik gerekçesiyle nakit tahsilat yapılmayacak; banka havalesi ve EFT ödemelerinin dışındaki POS tahsilatları, Proje Sorumlusu ve Halkla İlişkiler birimi vasıtasıyla yürütülecektir.</p>
+        </div>
+        <div class="card" style="background:var(--deep);color:var(--onDeep);border-color:var(--deep)">
+          <span class="eyebrow" style="color:var(--bronze-2)">Bütçe etkisi</span>
+          <div class="bignum" style="color:var(--onDeep);font-size:clamp(56px,7vw,96px)">⅓</div>
+          <p style="color:var(--onDeep);opacity:.85">Bu operasyonun, bir muhasebe personeli maliyetinin yaklaşık üçte biri oranında bir bütçeyle yürütülebileceği öngörülmektedir. Kişilere bağımlı yönetimin önüne geçilir; hata ve suiistimal riskleri en aza iner.</p>
+          <div class="facts"><div><small style="color:var(--onDeep);opacity:.7">Aylık muhasebe bedeli</small><b>40.000,00 ₺</b></div></div>
+        </div>
+      </div>
+      <div class="cadence">
+        <div class="card"><span class="when">Haftalık</span><b>Belge kontrolü</b><span>Haftalık kontrollerle teslim alınacak belge, fatura ve makbuzların aylık denetimleri eksiksiz tamamlanacaktır. Böylece her ay bütçe kontrolü ve denetim süreçleri başarıyla kapatılarak ilerleme sağlanacaktır.</span></div>
+        <div class="card"><span class="when">Her cuma</span><b>Ödeme onayı</b><span>Her hafta cuma günü; satın alma ve cari ödeme bakiye listeleri, TSP Merkez tarafından Proje Sorumlusu aracılığıyla Yönetim Kurulunun onayına sunulacak ve gerekli işlemler gerçekleştirilecektir.</span></div>
+        <div class="card"><span class="when">Aylık</span><b>Arşivleme</b><span>Denetimi tamamlanan geçmiş aya ait fatura ve belgeler, ilgili raporlarla birlikte proje müdürüne teslim edilerek arşive kaldırılacaktır.</span></div>
+        <div class="card"><span class="when">3 aylık</span><b>Denetim Kurulu raporu</b><span>Bu sayede, Kat Mülkiyeti Kanunu uyarınca zorunlu olan 3 aylık Denetim Kurulu raporlarının eksiksiz oluşturulması sağlanacaktır. Yönetim ve Denetim Kuruluna yönelik hazırlanan bu raporlar, düzenlenecek toplantılarda yetkililere teslim edilerek sunulacaktır.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 PERSONEL LİSTESİ 34 -->
+  <section class="slide" data-sec="02 Bütünsel Tesis Yönetimi" data-title="TSP bünyesindeki personel listesi">
+    <div class="inner"><div class="split">
+      <div class="head" style="gap:16px"><div class="eyebrow">Senaryo 1 · Tüm personel TSP bünyesinde</div><h2>Personel listesi</h2>
+        <div class="bignum" data-count="34">34</div><p class="muted">toplam çalışan. Güvenlik personeli ayrı teklif edilmiştir (bkz. bölüm 03).</p></div>
+      <div class="hbars" id="bars34"></div>
+    </div></div>
+  </section>
+
+  <!-- 10 TEKLİF MALİYET -->
+  <section class="slide" data-sec="02 Bütünsel Tesis Yönetimi" data-title="Bütünsel tesis yönetimi teklifi">
+    <div class="inner">
+      <div class="head" style="flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px">
+        <div class="head"><div class="eyebrow">Aylık maliyet</div><h2>Bütünsel Tesis Yönetimi Teklifi</h2></div>
+        <div class="toggle" role="group" aria-label="KDV"><button class="on" data-kdv="0">KDV hariç</button><button data-kdv="1">KDV dahil</button></div>
+      </div>
+      <div class="costgrid">
+        <div class="donut" id="donut1"></div>
+        <div class="legend" id="legend1"></div>
+      </div>
+      <details class="tablebox"><summary>Kalem kalem tabloyu göster</summary><div class="tscroll" id="table1"></div></details>
+    </div>
+  </section>
+
+  <!-- 11 PERSONEL DETAY -->
+  <section class="slide" data-sec="02 Bütünsel Tesis Yönetimi" data-title="Personel detaylı maliyet tablosu">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">Ek-1 · Kişi başı</div><h2>Personel detaylı maliyet</h2><p class="muted">Bir pozisyon seçin; kişi başı aylık maliyetin hangi kalemlerden oluştuğunu görün.</p></div>
+      <div class="rolepick" id="pick1"></div>
+      <div class="rolegrid" id="role1"></div>
+      <details class="tablebox"><summary>Ek-1 tablosunun tamamı</summary><div class="tscroll" id="detail1"></div></details>
+    </div>
+  </section>
+
+  <!-- 12 TEMİZLİK HARİTA -->
+  <section class="slide" data-sec="02 Bütünsel Tesis Yönetimi" data-title="Temizlik personeli görev konumları">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">Vaziyet planı · 96.000 m²</div><h2>Temizlik personeli görev konumları</h2></div>
+      <div class="mapgrid">
+        <button class="mapbtn" data-zoom="img/map12.jpg" data-cap="Temizlik personeli görev konumları"><img src="img/map12.jpg" alt="Temizlik personelinin vaziyet planı üzerindeki görev konumları"><span class="hint">⤢ Büyüt</span></button>
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <div class="phase" style="--c:var(--good)"><h3>1. Faz</h3><ul><li>Binalar <b>9</b></li><li>Çevre <b>2</b></li><li>Makinacı <b>1</b></li></ul></div>
+          <div class="phase" style="--c:var(--c5)"><h3>2. Faz</h3><ul><li>Binalar <b>5</b></li><li>Çevre <b>2</b></li><li>Makinacı <b>1</b></li></ul></div>
+          <div class="phase" style="--c:var(--bronze)"><h3>Toplam</h3><ul><li>Temizlik personeli <b>18</b></li><li>Makinacı (binicili temizlik otomatı) <b>2</b></li><li>Elektrikli çöp toplama aracı <b>1</b></li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 GÜVENLİK opener -->
+  <section class="slide" id="guvenlik" data-sec="03 Özel Güvenlik" data-title="Özel güvenlik hizmet teklifi">
+    <div class="inner"><div class="opener">
+      <div style="display:flex;flex-direction:column;gap:14px"><div class="secnum">03</div><h2>Özel Güvenlik Hizmet Teklifi</h2></div>
+      <ul class="points">
+        <li><p>Özel Güvenlik teklifimizde, 1. Faza eklenecek <b>5 güvenlik noktası</b>, güvenlik amiri ve atılacak devriye hesabı yapılarak maliyetlendirilmiştir.</p></li>
+        <li><p>Güvenlik senaryomuz, bütünsel tesis teklifimize ek olarak sunulmuş olup, görev nokta alanları kuşbakışı Taksim 360 proje vaziyet planına yerleştirilerek sizlere sunulmuştur.</p></li>
+        <li><p><b>Projede verimlilik ve risk analizi tespitleri sonrasında mevcut personel sayılarında değişiklik olabilir.</b></p></li>
+      </ul>
+    </div></div>
+  </section>
+
+  <!-- 14 GÜVENLİK MALİYET -->
+  <section class="slide" data-sec="03 Özel Güvenlik" data-title="Güvenlik maliyet tablosu">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">Aylık · KDV hariç</div><h2>Özel güvenlik hizmet maliyeti</h2><p class="muted">Kadroları artırıp azaltarak toplamın nasıl değiştiğini deneyin. Teklif edilen kadro: 1 + 3 + 6 + 32.</p></div>
+      <div class="secroles" id="secroles"></div>
+      <div class="secbar" id="secbar"></div>
+      <div class="totalbar"><div><div style="font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.7">Genel toplam (KDV hariç)</div><b id="secTotal"></b></div><div style="display:flex;gap:10px;align-items:center"><span id="secHead" class="mono"></span><button class="reset" id="secReset">Teklife dön</button></div></div>
+    </div>
+  </section>
+
+  <!-- 15 GÜVENLİK HARİTA -->
+  <section class="slide" data-sec="03 Özel Güvenlik" data-title="Güvenlik personeli görev konumları">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">Vaziyet planı · 1. ve 2. Faz</div><h2>Güvenlik personeli görev konumları</h2></div>
+      <div class="mapgrid">
+        <button class="mapbtn" data-zoom="img/map15.jpg" data-cap="Güvenlik personeli görev konumları"><img src="img/map15.jpg" alt="Güvenlik personelinin vaziyet planı üzerindeki görev konumları"><span class="hint">⤢ Büyüt</span></button>
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <div class="phase" style="--c:var(--bronze)"><h3>1. ve 2. Faz personel dağılımı</h3><ul><li>Güvenlik müdürü <b>1</b></li><li>Güvenlik amiri <b>3</b></li><li>CCTV <b>6</b></li><li>Güvenlik personeli <b>32</b></li><li><span>Toplam</span> <b>42</b></li></ul></div>
+          <p class="note">Yeşil hat 1. Fazı, kırmızı hat 2. Fazı gösterir. Planı büyütüp sürükleyerek parsel numaralarını inceleyebilirsiniz.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 DANIŞMANLIK -->
+  <section class="slide" id="danismanlik" data-sec="04 Yönetim Danışmanlık" data-title="Yönetim danışmanlık ve hizmet teklifi">
+    <div class="inner"><div class="opener">
+      <div style="display:flex;flex-direction:column;gap:14px"><div class="secnum">04</div><h2>Yönetim Danışmanlık ve Hizmet Teklifimiz</h2></div>
+      <ul class="points">
+        <li><p>Bu teklifimizde; <b>Proje ve Saha Sorumluları TSP Yapı Yönetim bünyesinde</b> yer aldığı, diğer idari, teknik ve temizlik personellerinin site yönetimi bünyesinde yer alacağı kabul edilmiştir.</p></li>
+        <li><p>Proje Sorumlusu ve Saha Sorumluları, TSP Yapı Yönetiminin uygulayacağı kural, disiplin ve görev tanımlarıyla hareket edecekleri için <b>otorite boşluğu oluşmaması için</b> maliyetlendirme bu doğrultuda yapılmıştır.</p></li>
+      </ul>
+    </div></div>
+  </section>
+
+  <!-- 17 DANIŞMANLIK MALİYET -->
+  <section class="slide" data-sec="04 Yönetim Danışmanlık" data-title="Bütünsel yönetim teklif maliyeti">
+    <div class="inner">
+      <div class="head" style="flex-direction:row;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:16px">
+        <div class="head"><div class="eyebrow">Senaryo 2 · Personel site bünyesinde</div><h2>TSP teklif maliyet analizi</h2></div>
+        <div class="toggle" role="group" aria-label="KDV"><button class="on" data-kdv="0">KDV hariç</button><button data-kdv="1">KDV dahil</button></div>
+      </div>
+      <div class="costgrid">
+        <div class="donut" id="donut2"></div>
+        <div class="legend" id="legend2"></div>
+      </div>
+      <details class="tablebox"><summary>TSP personeli detaylı maliyet (3 kişi)</summary><div class="tscroll" id="detail2"></div></details>
+    </div>
+  </section>
+
+  <!-- 18 SİTE opener + list -->
+  <section class="slide" id="site" data-sec="05 Site Yönetimi Bünyesi" data-title="Site yönetimi bünyesindeki personel">
+    <div class="inner"><div class="split" style="align-items:start">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:end;gap:16px;flex-wrap:wrap"><div class="secnum">05</div><h2 style="flex:1;min-width:220px">Site Yönetimi Bünyesinde Personel Maliyet Analizi</h2></div>
+        <p class="lead">Proje Sorumlusu ve Saha Sorumluları dışındaki diğer personellerin Site Yönetimi bünyesinde olduğu kabul edilmiştir.</p>
+        <p class="muted">Site Yönetimi bünyesinde olmasına rağmen brüt maaş dışında kıdem, izin ve resmi tatiller için karşılık ayrılması gerektiği için reel maliyetler orta ve uzun vadede aynı kabul edilmiştir. Personel detaylı maliyet analizlerinde gider kalemleri görülmektedir.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="facts"><div><small>Toplam çalışan</small><b class="bignum" style="font-size:clamp(48px,6vw,80px)">31</b></div></div>
+        <div class="hbars" id="bars31"></div>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 19 SİTE MALİYET -->
+  <section class="slide" data-sec="05 Site Yönetimi Bünyesi" data-title="Site bünyesindeki personelin maliyet analizi">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">Aylık · Site yönetimi bünyesi</div><h2>Personel maliyet analizi</h2></div>
+      <div class="costgrid">
+        <div class="donut" id="donut3"></div>
+        <div class="legend" id="legend3"></div>
+      </div>
+      <div class="rolepick" id="pick3"></div>
+      <div class="rolegrid" id="role3"></div>
+      <details class="tablebox"><summary>Site yönetimi personel detaylı maliyet tablosu</summary><div class="tscroll" id="detail3"></div></details>
+    </div>
+  </section>
+
+  <!-- 20 SONUÇ -->
+  <section class="slide" id="sonuc" data-sec="06 Sonuç" data-title="Senaryo karşılaştırması">
+    <div class="inner">
+      <div class="head"><div class="eyebrow">06 · Sonuç</div><h2>İki senaryonun karşılaştırması</h2><p class="muted">Aylık toplam maliyet, KDV dahil. Güvenlik hizmeti iki senaryoda da hariçtir.</p></div>
+      <div class="scen">
+        <div class="scencard" id="scA">
+          <span class="pill tag">Senaryo 1</span>
+          <h3>Tüm personel TSP bünyesinde</h3>
+          <div class="amount" data-amt="4817432.05"></div>
+          <div class="vbar"><div style="background:var(--c1)" data-w="4817432.05"></div></div>
+          <dl><dt>Bütünsel tesis teklifi (KDV hariç, güvenlik hariç)</dt><dd>4.014.526,71</dd><dt>KDV %20</dt><dd>802.905,34</dd></dl>
+        </div>
+        <div class="scencard win" id="scB">
+          <span class="pill tag" style="background:color-mix(in srgb,var(--good) 15%,transparent);color:var(--good)">Senaryo 2 · Önerilen</span>
+          <h3>Personel site yönetimi bünyesinde</h3>
+          <div class="amount" data-amt="4195825.02"></div>
+          <div class="vbar"><div style="background:var(--c1)" data-w="1227289.85"></div><div style="background:var(--c2)" data-w="2968535.17"></div></div>
+          <dl><dt><span style="color:var(--c1)">■</span> TSP Yapı Yönetim (1.022.741,54 + KDV)</dt><dd>1.227.289,85</dd><dt><span style="color:var(--c2)">■</span> Site bünyesindeki personel</dt><dd>2.968.535,17</dd></dl>
+        </div>
+      </div>
+      <div class="saving">
+        <div><small>Aylık tasarruf</small><div class="val" data-amt="621607.03"></div></div>
+        <p class="lead" style="max-width:52ch">Site Yönetiminin personeli üzerine alması durumunda aylık <b>621.607,03 ₺</b> tasarruf sağlanacağı görülmektedir. Yıllık karşılığı yaklaşık <b class="num" id="yearly"></b>.</p>
+      </div>
+      <div class="cols">
+        <p class="muted">TSP Yapı Yönetim maliyetleri 1.022.741,54 TL + KDV, yani 1.227.289,85 TL’dir. Site Yönetimi bünyesindeki personel maliyetlerinin 2.968.535,17 TL olarak gerçekleşmesi durumunda gerçekleşen toplam maliyet 4.195.825,02 TL’dir.</p>
+        <p class="muted">İlk senaryoda gerçekleşen toplam maliyetin 4.817.432,05 TL olduğu düşünüldüğünde 621.607,03 TL fark oluştuğu görülmektedir. Site Yönetimi bünyesinde olmasına rağmen brüt maaş dışında kıdem, izin ve resmi tatiller için karşılık ayrılması gerektiğinden reel maliyetler orta ve uzun vadede aynı kabul edilmiştir.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 KAPANIŞ -->
+  <section class="slide" data-sec="06 Sonuç" data-title="Teşekkürler">
+    <div class="inner"><div class="cover">
+      <div class="photo" style="aspect-ratio:3/4"><img src="img/cover.jpg" alt="Taksim 360 projesinin cadde perspektifi"></div>
+      <div class="thanks" style="display:flex;flex-direction:column;gap:22px">
+        <div class="eyebrow">Yönetim Kurulunun takdirine</div>
+        <h1 style="font-size:clamp(36px,5vw,64px)">Teşekkür ederiz</h1>
+        <p class="lead">Değerlendirmelerimize ve teklifimize zaman ayırdığınız için teşekkür eder, değerli geri dönüşlerinizi bekleriz.</p>
+        <p class="muted">Saygılarımızla,</p>
+        <div class="tsplogo"><svg class="" viewBox="0 0 241 105" role="img" aria-label="TSP Total Solution Provider"><use href="#tsp-logo"/></svg></div><p class="muted" style="font-size:14px">TSP Yapı Yönetim</p>
+        <div><button class="iconbtn" data-go="0">↺ Başa dön</button></div>
+      </div>
+    </div></div>
+  </section>
+
+  </main>
+
+  <footer class="rail">
+    <button class="navbtn" id="prev" aria-label="Önceki slayt">←</button>
+    <div class="progress" id="progress"></div>
+    <span class="counter" id="counter"></span>
+    <button class="navbtn" id="next" aria-label="Sonraki slayt">→</button>
+  </footer>
+</div>
+
+<div class="overview" id="overview" hidden>
+  <div class="ohead"><h2 style="font-size:28px">Tüm slaytlar</h2><button class="iconbtn" id="closeOverview">Kapat ✕</button></div>
+  <div class="ogrid" id="ogrid"></div>
+</div>
+
+<div class="lightbox" id="lightbox" hidden>
+  <div class="lbbar"><span id="lbcap"></span><div style="display:flex;gap:8px"><button id="lbOut">−</button><button id="lbIn">+</button><button id="lbFit">Sığdır</button><button id="lbClose">Kapat ✕</button></div></div>
+  <div class="lbview" id="lbview"><img id="lbimg" alt=""></div>
+</div>
+
+<script>
+(function(){
+const fmt=n=>new Intl.NumberFormat('tr-TR',{minimumFractionDigits:2,maximumFractionDigits:2}).format(n);
+const tl=n=>fmt(n)+' ₺';
+const cssVar=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+
+/* ---------- navigation ---------- */
+const slides=$$('.slide'); let cur=0;
+const prog=$('#progress');
+slides.forEach((s,i)=>{const b=document.createElement('button');b.setAttribute('aria-label',(i+1)+'. slayt: '+s.dataset.title);b.title=s.dataset.title;b.onclick=()=>go(i);prog.appendChild(b)});
+const og=$('#ogrid');
+slides.forEach((s,i)=>{const b=document.createElement('button');b.innerHTML=`<span class="on-n">${String(i+1).padStart(2,'0')}</span><b>${s.dataset.title}</b><small>${s.dataset.sec}</small>`;b.onclick=()=>{go(i);closeOv()};og.appendChild(b)});
+const onEnter={};
+function go(i){
+  i=Math.max(0,Math.min(slides.length-1,i));
+  slides.forEach((s,k)=>{s.classList.toggle('active',k===i);s.classList.toggle('before',k<i);s.setAttribute('aria-hidden',k!==i)});
+  [...prog.children].forEach((b,k)=>{b.classList.toggle('on',k===i);b.classList.toggle('done',k<i)});
+  [...og.children].forEach((b,k)=>b.classList.toggle('on',k===i));
+  cur=i; slides[i].scrollTop=0;
+  document.querySelectorAll('.slide video').forEach(v=>{if(!slides[i].contains(v)&&!v.paused)v.pause()});
+  $('#crumb').innerHTML=`<em>${String(i+1).padStart(2,'0')}</em>${slides[i].dataset.sec}`;
+  $('#counter').textContent=`${i+1} / ${slides.length}`;
+  $('#prev').disabled=i===0; $('#next').disabled=i===slides.length-1;
+  const id='s'+(i+1); try{history.replaceState(null,'','#'+id)}catch(e){}
+  (onEnter[i]||[]).forEach(f=>f());
+}
+$('#prev').onclick=()=>go(cur-1); $('#next').onclick=()=>go(cur+1);
+$$('[data-go]').forEach(b=>b.onclick=()=>{const t=b.dataset.go;go(isNaN(t)?slides.indexOf(document.getElementById(t)):+t)});
+document.addEventListener('keydown',e=>{
+  if(!$('#lightbox').hidden){if(e.key==='Escape')closeLb();return}
+  if(!$('#overview').hidden){if(e.key==='Escape')closeOv();return}
+  if(e.target.closest('input,textarea,select,video'))return;
+  if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();go(cur+1)}
+  else if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();go(cur-1)}
+  else if(e.key==='Home')go(0); else if(e.key==='End')go(slides.length-1);
+  else if(e.key.toLowerCase()==='f'){e.preventDefault();toggleFs()}
+  else if(e.key.toLowerCase()==='o'||(e.key==='Escape'&&!fsEl()))toggleOv();
+});
+let tx=null,ty=null;
+$('#stage').addEventListener('touchstart',e=>{tx=e.touches[0].clientX;ty=e.touches[0].clientY},{passive:true});
+$('#stage').addEventListener('touchend',e=>{if(tx==null)return;const dx=e.changedTouches[0].clientX-tx,dy=e.changedTouches[0].clientY-ty;if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)*1.5)go(cur+(dx<0?1:-1));tx=null},{passive:true});
+function toggleOv(){$('#overview').hidden?openOv():closeOv()}
+function openOv(){$('#overview').hidden=false;og.children[cur].focus()}
+function closeOv(){$('#overview').hidden=true}
+$('#openOverview').onclick=openOv; $('#closeOverview').onclick=closeOv;
+const when=(sel,f)=>{const i=slides.indexOf(document.querySelector(sel).closest('.slide'));(onEnter[i]=onEnter[i]||[]).push(f)};
+
+/* ---------- org chart ---------- */
+const ORG={
+ tsp:{t:'TSP Merkez',k:'Yönetim danışmanlığı',d:'Avukatlık, mali müşavirlik, bordrolama, insan kaynakları ve satın alma hizmetlerini tek çatı altında sunar. Muhasebe kayıtları ve aidat organizasyonu merkezden yürütülür.',s:[['Yönetim hizmet bedeli','240.000,00 ₺'],['Merkez giderleri','108.640,00 ₺']]},
+ hukuk:{t:'Hukuk',k:'TSP Merkez desteği',d:'Yönetim Kurulunun Kat Mülkiyeti Kanunu ve Yönetim Planı doğrultusunda hareket etmesini sağlar. Genel kurul süreçlerini yönetir; Yönetim ve Denetim Kuruluna hukuki danışmanlık verir.',s:[['Kapsam','Merkez hizmeti']]},
+ ik:{t:'İnsan Kaynakları',k:'TSP Merkez desteği',d:'Bordrolama ve insan kaynakları süreçleri TSP Merkez tarafından tek çatı altında yürütülür.',s:[['Kapsam','Merkez hizmeti']]},
+ muhasebe:{t:'Muhasebe',k:'TSP Merkez · Apsiyon',d:'Aidat tahakkukları, enerji gider paylaşımları ve tahsilat takipleri merkezden organize edilir. Nakit tahsilat yapılmaz. 3 aylık Denetim Kurulu raporları eksiksiz hazırlanır.',s:[['Aylık bedel','40.000,00 ₺'],['Yazılım','32.640,00 ₺'],['Bağımsız bölüm','816']]},
+ satin:{t:'Satın Alma',k:'TSP Merkez desteği',d:'Her hafta cuma günü satın alma ve cari ödeme bakiye listeleri Proje Sorumlusu aracılığıyla Yönetim Kurulunun onayına sunulur.',s:[['Döngü','Haftalık · Cuma']]},
+ proje:{t:'Proje Sorumlusu',k:'Saha yönetiminin başı',d:'Sitenin yönetim organizasyonunu yürütür, Yönetim Kuruluna raporlar ve toplantılara katılır. Çağrı merkezi ve halkla ilişkiler doğrudan ona bağlıdır.',s:[['Kadro','1'],['Kişi başı aylık','322.905,44 ₺']]},
+ saha:{t:'Saha Sorumlusu (Müd. Yrd.)',k:'Operasyon',d:'Saha ve operasyon süreçlerini 7/24 kontrol altında tutar. Teknik ve temizlik şefleri ona bağlanır; görevlendirme, iş tanımı ve vardiya planlarını takip eder.',s:[['Kadro','2'],['Kişi başı aylık','175.598,05 ₺'],['Toplam','351.196,10 ₺']]},
+ halkla:{t:'Halkla İlişkiler',k:'Sakin ilişkileri',d:'Çağrı merkezi ve resepsiyonla koordineli çalışır. Havale/EFT dışındaki POS tahsilatları bu birim ve Proje Sorumlusu üzerinden yürütülür.',s:[['Kadro','1'],['Aylık','132.312,41 ₺']]},
+ cagri:{t:'Çağrı Merkezi',k:'7/24 talep yönetimi',d:'Şikâyet, öneri ve talepleri toplar, ilgili birime aktarır, tamamlanma süresini takip eder ve memnuniyet geri bildirimi alır.',s:[['Kadro','3'],['Toplam aylık','393.187,23 ₺']]},
+ teknik:{t:'Teknik Hizmetler',k:'Elektrik ve mekanik',d:'3 elektrik ve 2 mekanik teknisyeninden oluşur; teknik şef Saha Sorumlusuna bağlıdır.',s:[['Kadro','5'],['Toplam aylık','731.052,19 ₺']]},
+ temizlik:{t:'Temizlik Hizmetleri',k:'96.000 m²',d:'18 temizlik personeli ve 2 makinacı, 1. ve 2. fazlara dağıtılmıştır. Çöp toplama elektrikli açık kasa kamyonetle yapılır.',s:[['Kadro','20'],['Toplam aylık','1.557.350,75 ₺'],['Araç','36.000,00 ₺/ay']]},
+ guvenlik:{t:'Güvenlik Hizmetleri',k:'Ayrı teklif',d:'1 güvenlik müdürü, 3 vardiya amiri, 6 CCTV ve 32 güvenlik personeli. 1. Faza 5 yeni güvenlik noktası eklenmiştir.',s:[['Kadro','42'],['Toplam aylık','3.884.424,05 ₺']]},
+ resepsiyon:{t:'Resepsiyon / Ön Büro',k:'Karşılama',d:'Ön büro hizmetleri; halkla ilişkiler ve çağrı merkeziyle koordineli çalışır.',s:[['Kadro','2'],['Toplam aylık','177.882,59 ₺']]}
+};
+const panel=$('#orgPanel');
+function showOrg(k){const o=ORG[k];$$('.node').forEach(n=>n.classList.toggle('sel',n.dataset.n===k));
+  panel.innerHTML=`<span class="eyebrow">${o.k}</span><h3>${o.t}</h3><p>${o.d}</p><div class="stats">${o.s.map(([a,b])=>`<div><b>${b}</b><span>${a}</span></div>`).join('')}</div>`}
+$$('.node').forEach(n=>n.onclick=()=>showOrg(n.dataset.n)); showOrg('proje');
+
+/* ---------- headcount bars ---------- */
+function bars(el,rows,total){const max=Math.max(...rows.map(r=>r[1]));
+  el.innerHTML=rows.map(r=>`<div class="hbar"><span>${r[0]}</span><div class="track"><div class="fill" data-w="${r[1]/max*100}"></div></div><span class="v">${r[1]}</span></div>`).join('')+`<div class="hbar total"><span>Toplam çalışan</span><span></span><span class="v">${total}</span></div>`}
+const L34=[['Proje Sorumlusu',1],['Saha Sorumlusu (Müd. Yrd.)',2],['Halkla İlişkiler',1],['Çağrı Merkezi Personeli',3],['Elektrik Teknisyeni',3],['Mekanik Teknisyeni',2],['Resepsiyon',2],['Temizlik Personeli',18],['Makinacı',2]];
+bars($('#bars34'),L34,34); bars($('#bars31'),L34.slice(2),31);
+function growBars(el){el.querySelectorAll('.fill').forEach(f=>{f.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>f.style.width=f.dataset.w+'%'))})}
+when('#bars34',()=>growBars($('#bars34'))); when('#bars31',()=>growBars($('#bars31')));
+
+/* ---------- donut + legend ---------- */
+const COLS=['--c1','--c5','--c2','--c3','--c4','--c6'];
+function donut(id,legendId,parts,opts){
+  const host=$('#'+id), leg=$('#'+legendId); let kdv=false, hl=-1;
+  function render(){
+    const m=kdv?1.2:1, total=opts.total||parts.reduce((a,p)=>a+p.v,0);
+    const R=80,C=2*Math.PI*R; let off=0;
+    host.innerHTML=`<svg viewBox="0 0 200 200" role="img" aria-label="${opts.label}">${parts.map((p,i)=>{const len=p.v/total*C;const s=`<circle cx="100" cy="100" r="${R}" stroke="${cssVar(COLS[i])}" stroke-dasharray="${Math.max(len-1.2,0)} ${C}" stroke-dashoffset="${-off}" data-i="${i}" style="stroke-width:${hl===i?30:22};opacity:${hl<0||hl===i?1:.35}"></circle>`;off+=len;return s}).join('')}</svg>
+      <div class="center"><small>${hl<0?opts.center:parts[hl].n}</small><b>${tl((hl<0?total:parts[hl].v)*m)}</b><small>${hl<0?(kdv?'KDV dahil':'KDV hariç'):(parts[hl].v/total*100).toFixed(2).replace('.',',')+' %'}</small></div>`;
+    host.querySelectorAll('circle').forEach(c=>{c.onmouseenter=()=>{hl=+c.dataset.i;render()};c.onmouseleave=()=>{hl=-1;render()}});
+    leg.innerHTML=parts.map((p,i)=>`<button data-i="${i}" class="${hl===i?'hl':''}"><span class="sw" style="background:var(${COLS[i]})"></span><span>${p.n}${p.c?` <span class="muted">· ${p.c}</span>`:''}</span><span class="amt">${fmt(p.v*m)}</span><span class="pct">${(p.v/total*100).toFixed(1).replace('.',',')}%</span></button>`).join('')
+      +(kdv?`<div class="sum"><span>Toplam (KDV hariç)</span><span>${fmt(total)}</span></div><div class="sum"><span>KDV %20</span><span>${fmt(total*.2)}</span></div>`:'')
+      +`<div class="sum grand"><span>${kdv?'Genel toplam':opts.totalLabel}</span><span>${tl(total*m)}</span></div>`;
+    leg.querySelectorAll('button').forEach(b=>{b.onmouseenter=b.onfocus=()=>{hl=+b.dataset.i;render();leg.querySelector(`[data-i="${hl}"]`)?.focus({preventScroll:true})};b.onmouseleave=()=>{hl=-1;render()}});
+  }
+  render();
+  const tg=host.closest('.slide').querySelector('.toggle');
+  if(tg)tg.querySelectorAll('button').forEach(b=>b.onclick=()=>{kdv=b.dataset.kdv==='1';tg.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));render()});
+  if(!opts.kdv&&tg)tg.hidden=true;
+  return render;
+}
+const P1=[{n:'Güvenlik hizmetleri',c:'42 kişi',v:3884424.05},{n:'Temizlik hizmetleri',c:'20 kişi',v:1557350.75},{n:'İdari hizmetler',c:'7 kişi',v:1199601.17},{n:'Teknik hizmetler',c:'5 kişi',v:731052.19},{n:'Yönetim hizmet bedeli',v:240000},{n:'Ön büro + merkez giderleri',c:'2 kişi',v:177882.59+108640.00}];
+const r1=donut('donut1','legend1',P1,{total:7898950.76,label:'Bütünsel tesis yönetimi aylık maliyet dağılımı',center:'Aylık toplam',totalLabel:'Toplam (KDV hariç)',kdv:true});
+const P2=[{n:'Proje Sorumlusu',c:'1 kişi',v:322905.44},{n:'Saha Sorumlusu',c:'2 kişi',v:351196.10},{n:'Yönetim hizmet bedeli',v:240000},{n:'Muhasebe',c:'816 BB',v:40000},{n:'Çöp toplama aracı (elektrikli)',v:36000},{n:'Yazılım',c:'816 BB',v:32640}];
+const r2=donut('donut2','legend2',P2,{label:'TSP teklif maliyet dağılımı',center:'TSP aylık',totalLabel:'Toplam (KDV hariç)',kdv:true});
+const P3=[{n:'Temizlik hizmetleri',c:'20 kişi',v:1542350.75},{n:'Teknik hizmetler',c:'5 kişi',v:727302.19},{n:'İdari hizmetler',c:'4 kişi',v:522499.64},{n:'Ön büro hizmetleri',c:'2 kişi',v:176382.59}];
+const r3=donut('donut3','legend3',P3,{label:'Site bünyesindeki personelin maliyet dağılımı',center:'Personel giderleri',totalLabel:'Personel giderleri toplamı',kdv:false});
+/* re-color on theme change */
+try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{r1();r2();r3()});new MutationObserver(()=>{r1();r2();r3()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']})}catch(e){}
+
+/* ---------- tables ---------- */
+const T1=[['İdari Hizmetler'],['Proje Sorumlusu',1,322905.44,322905.44],['Saha Sorumlusu (Müd. Yrd.)',2,175598.05,351196.10],['Çağrı Merkezi Personeli',3,131062.41,393187.23],['Halkla İlişkiler',1,132312.41,132312.41],['T','Toplam idari hizmetler',7,1199601.17],
+['Güvenlik Hizmetleri'],['Güvenlik personeli hizmet maliyeti','','',3884424.05],['T','Toplam güvenlik hizmetleri','',3884424.05],
+['Temizlik Hizmetleri'],['Temizlik Personeli',18,76709.34,1380768.15],['Makinacı',2,88291.30,176582.59],['T','Toplam temizlik hizmetleri',20,1557350.75],
+['Teknik Hizmetler'],['Elektrik Teknisyeni',3,146210.44,438631.32],['Mekanik Teknisyeni',2,146210.44,292420.88],['T','Toplam teknik hizmetler',5,731052.19],
+['Ön Büro Hizmetleri'],['Ön Büro / Resepsiyon',2,88941.30,177882.59],['T','Toplam ön büro hizmetler',2,177882.59],
+['T','Personel giderleri toplamı',34,7550310.76],
+['Merkez Giderleri'],['Hukuk','','',''],['Muhasebe',816,'',40000],['Yazılım',816,'',32640],['Çöp Toplama Aracı (Elektrikli)',1,'',36000],['T','Toplam merkez giderleri','',108640],
+['T','Yönetim hizmet bedeli','',240000],['T','Toplam (KDV hariç)',34,7898950.76],['T','KDV %20','',1579790.15],['T','Genel toplam','',9478740.91]];
+const nv=v=>v===''||v==null?'':(typeof v==='number'&&!Number.isInteger(v)||v>=1000?fmt(v):v);
+$('#table1').innerHTML=`<table><thead><tr><th>Personel tanımı</th><th>Sayı</th><th>Birim aylık</th><th>Toplam aylık</th></tr></thead><tbody>${T1.map(r=>r.length===1?`<tr><th colspan="4" style="text-align:left">${r[0]}</th></tr>`:r[0]==='T'?`<tr class="tot"><td>${r[1]}</td><td>${r[2]}</td><td></td><td>${nv(r[3])}</td></tr>`:`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${nv(r[2])}</td><td>${nv(r[3])}</td></tr>`).join('')}</tbody></table>`;
+
+/* per-person component data: [name, count, net, brut, yol, yemek, kidem, ihbar, izin, tatil, isg, mms, kiyafet, genel, techizat, unit, total] */
+const COMP=[['Brüt maaş','--c1'],['Yol','--c2'],['Yemek','--c3'],['Kıdem','--c4'],['İhbar','--c6'],['Yıllık izin','--c5'],['Resmi tatil','--c6'],['İSG','--c2'],['3. Kişi M.M.S.','--c4'],['Kıyafet','--c3'],['Genel giderler','--c5'],['Teçhizat','--c1']];
+const D1=[['Proje Sorumlusu',1,140000,265435.63,3628,7500,15483.75,0,7225.75,21382.31,750,750,0,750,0,322905.44,322905.44],
+['Saha Sorumlusu (Müd. Yrd.)',2,80000,139112,3628,7500,8114.87,0,3786.94,11206.24,750,750,0,750,0,175598.05,351196.10],
+['Halkla İlişkiler',1,60000,100363,3628,7500,5854.51,0,2732.10,8084.80,750,750,1250,750,650,132312.41,132312.41],
+['Çağrı Merkezi Personeli',3,60000,100363,3628,7500,5854.51,0,2732.10,8084.80,750,750,0,750,650,131062.41,393187.23],
+['Elektrik Teknisyeni',3,50000,83034.30,3628,7500,4843.67,0,2260.38,6688.87,750,750,1250,750,0,111455.22,334365.66],
+['Mekanik Teknisyeni',2,50000,83034.30,3628,7500,4843.67,0,2260.38,6688.87,750,750,1250,750,0,111455.22,222910.44],
+['Temizlik Personeli',18,35000,53237.93,3628,7500,3105.55,0,1449.25,4288.61,750,750,1250,750,0,76709.34,1380768.15],
+['Makinacı',2,40000,63170.05,3628,7500,3684.92,0,1719.63,5088.70,750,750,1250,750,0,88291.30,176582.59],
+['Resepsiyon',2,60000,100363,3628,7500,5854.51,0,2732.10,8084.80,750,750,1250,750,650,132312.41,264624.82]];
+const D3=[['Halkla İlişkiler',1,60000,100363,3628,7500,5854.51,0,2732.10,8084.80,750,750,1250,0,650,131562.41,131562.41],
+['Çağrı Merkezi Personeli',3,60000,100363,3628,7500,5854.51,0,2732.10,8084.80,750,750,0,0,650,130312.41,390937.23],
+['Elektrik Teknisyeni',3,65000,112838.68,3628,7500,6582.26,0,3071.72,9089.78,750,750,1250,0,0,145460.44,436381.32],
+['Mekanik Teknisyeni',2,65000,112838.68,3628,7500,6582.26,0,3071.72,9089.78,750,750,1250,0,0,145460.44,290920.88],
+['Temizlik Personeli',18,35000,53237.93,3628,7500,3105.55,0,1449.25,4288.61,750,750,1250,0,0,75959.34,1367268.15],
+['Makinacı',2,40000,63170.05,3628,7500,3684.92,0,1719.63,5088.70,750,750,1250,0,0,87541.30,175082.59],
+['Resepsiyon',2,40000,63170.05,3628,7500,3684.92,0,1719.63,5088.70,750,750,1250,0,650,88191.30,176382.59]];
+function detailTable(el,rows){
+  el.innerHTML=`<table><thead><tr><th>Personel</th><th>Sayı</th><th>Net maaş</th>${COMP.map(c=>`<th>${c[0]}</th>`).join('')}<th>Birim maliyet</th><th>Toplam</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td>${r.slice(2,15).map(v=>`<td>${fmt(v)}</td>`).join('')}<td>${fmt(r[15])}</td><td>${fmt(r[16])}</td></tr>`).join('')}</tbody></table>`}
+detailTable($('#detail1'),D1); detailTable($('#detail2'),D1.slice(0,2)); detailTable($('#detail3'),D3);
+function rolePicker(pickId,gridId,rows){
+  const pick=$('#'+pickId),grid=$('#'+gridId);
+  pick.innerHTML=rows.map((r,i)=>`<button data-i="${i}">${r[0]}</button>`).join('');
+  function show(i){const r=rows[i];pick.querySelectorAll('button').forEach(b=>b.classList.toggle('on',+b.dataset.i===i));
+    const vals=r.slice(3,15), sum=r[15];
+    grid.innerHTML=`<div style="display:flex;flex-direction:column;gap:18px">
+      <div class="facts"><div><small>Net maaş</small><b>${tl(r[2])}</b></div><div><small>Kişi başı aylık maliyet</small><b>${tl(sum)}</b></div><div><small>Kadro toplamı (${r[1]} kişi)</small><b>${tl(r[16])}</b></div></div>
+      <div class="stack" role="img" aria-label="${r[0]} maliyet kalemleri">${vals.map((v,k)=>`<div title="${COMP[k][0]}: ${fmt(v)}" style="flex-grow:${v};background:var(${COMP[k][1]});${k%2?'opacity:.8':''}"></div>`).join('')}</div>
+      <p class="muted" style="font-size:14px">Brüt maaş kişi başı maliyetin %${(vals[0]/sum*100).toFixed(1).replace('.',',')}’ini oluşturur. Net maaşın işverene toplam maliyete oranı ${(sum/r[2]).toFixed(2).replace('.',',')} katıdır.</p></div>
+      <div class="kv">${vals.map((v,k)=>`<span class="sw" style="background:var(${COMP[k][1]});${k%2?'opacity:.8':''}"></span><span class="${v?'':'z'}">${COMP[k][0]}</span><span class="${v?'':'z'}">${fmt(v)}</span>`).join('')}<span></span><b>Birim maliyet</b><b class="num" style="text-align:right">${fmt(sum)}</b></div>`;
+  }
+  pick.querySelectorAll('button').forEach(b=>b.onclick=()=>show(+b.dataset.i)); show(0);
+}
+rolePicker('pick1','role1',D1); rolePicker('pick3','role3',D3);
+
+/* ---------- security calculator ---------- */
+const SEC=[{n:'Güvenlik Müdürü',ele:70000,u:156872.30,c:1},{n:'Vardiya Amiri',ele:52500,u:116476.46,c:3},{n:'CCTV Personeli',ele:43500,u:95701.47,c:6},{n:'Güvenlik Personeli',ele:40000,u:87622.30,c:32}];
+const SEC0=SEC.map(s=>s.c); const SECOFF=[156872.30,349429.38,574208.79,2803913.57];
+const sr=$('#secroles');
+function secRender(){
+  sr.innerHTML=SEC.map((s,i)=>`<div class="secrole"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><b>${s.n}</b><span class="sw" style="width:12px;height:12px;border-radius:2px;background:var(${COLS[i]})"></span></div>
+    <div style="display:flex;align-items:end;justify-content:space-between;gap:8px"><span class="count">${s.c}</span><span class="stepper"><button data-i="${i}" data-d="-1" aria-label="${s.n} azalt">−</button><output>${s.c}</output><button data-i="${i}" data-d="1" aria-label="${s.n} artır">+</button></span></div>
+    <div class="row"><span>Ele geçen ücret</span><span>${fmt(s.ele)}</span></div><div class="row"><span>Yol + yemek</span><span>${fmt(11128)}</span></div><div class="row"><span>Kişi başı aylık maliyet</span><span>${fmt(s.u)}</span></div>
+    <div class="row big"><span>Aylık maliyet</span><span>${fmt(s.c===SEC0[i]?SECOFF[i]:s.u*s.c)}</span></div></div>`).join('');
+  sr.querySelectorAll('.stepper button').forEach(b=>b.onclick=()=>{const s=SEC[+b.dataset.i];s.c=Math.max(0,s.c+ +b.dataset.d);secRender();sr.querySelector(`[data-i="${b.dataset.i}"][data-d="${b.dataset.d}"]`).focus()});
+  const vals=SEC.map((s,i)=>s.c===SEC0[i]?SECOFF[i]:s.u*s.c), tot=vals.reduce((a,b)=>a+b,0);
+  $('#secbar').innerHTML=vals.map((v,i)=>`<div style="flex-grow:${v};background:var(${COLS[i]})" title="${SEC[i].n}: ${fmt(v)}"></div>`).join('');
+  const same=SEC.every((s,i)=>s.c===SEC0[i]);
+  $('#secTotal').textContent=tl(same?3884424.05:tot);
+  const head=SEC.reduce((a,s)=>a+s.c,0);
+  $('#secHead').textContent=`${head} kişi${same?' · teklif':' · '+(tot-3884424.05>=0?'+':'')+fmt(tot-3884424.05)}`;
+  $('#secReset').hidden=same;
+}
+$('#secReset').onclick=()=>{SEC.forEach((s,i)=>s.c=SEC0[i]);secRender()}; secRender();
+
+/* ---------- scenario ---------- */
+function countUp(el,to){const t0=performance.now(),d=1100;const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function f(t){const p=reduce?1:Math.min(1,(t-t0)/d),e=1-Math.pow(1-p,3);el.textContent=tl(to*e);if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+const MAXS=4817432.05;
+$$('#sonuc [data-amt]').forEach(el=>el.textContent=tl(+el.dataset.amt));
+$('#yearly').textContent=tl(621607.03*12);
+$$('#sonuc .vbar div').forEach(d=>d.style.width=(+d.dataset.w/MAXS*100)+'%');
+when('#scA',()=>{$$('#sonuc [data-amt]').forEach(el=>countUp(el,+el.dataset.amt));$$('#sonuc .vbar div').forEach(d=>{d.style.width='0';requestAnimationFrame(()=>requestAnimationFrame(()=>d.style.width=(+d.dataset.w/MAXS*100)+'%'))})});
+
+/* ---------- lightbox (zoom + pan) ---------- */
+const lb=$('#lightbox'),view=$('#lbview'),img=$('#lbimg');let sc=1,px=0,py=0,fit=1;
+function apply(){img.style.transform=`translate(${px}px,${py}px) scale(${sc})`}
+function fitImg(){const W=view.clientWidth,H=view.clientHeight;fit=Math.min(W/img.naturalWidth,H/img.naturalHeight);sc=fit;px=(W-img.naturalWidth*sc)/2;py=(H-img.naturalHeight*sc)/2;apply()}
+function zoomAt(f,cx,cy){const ns=Math.max(fit*.8,Math.min(fit*6,sc*f));px=cx-(cx-px)*ns/sc;py=cy-(cy-py)*ns/sc;sc=ns;apply()}
+$$('[data-zoom]').forEach(b=>b.onclick=()=>{lb.hidden=false;$('#lbcap').textContent=b.dataset.cap;img.onload=fitImg;img.src=b.dataset.zoom;img.alt=b.dataset.cap;if(img.complete)fitImg();$('#lbClose').focus()});
+function closeLb(){lb.hidden=true}
+$('#lbClose').onclick=closeLb; $('#lbFit').onclick=fitImg;
+$('#lbIn').onclick=()=>zoomAt(1.4,view.clientWidth/2,view.clientHeight/2);
+$('#lbOut').onclick=()=>zoomAt(1/1.4,view.clientWidth/2,view.clientHeight/2);
+view.addEventListener('wheel',e=>{e.preventDefault();const r=view.getBoundingClientRect();zoomAt(e.deltaY<0?1.15:1/1.15,e.clientX-r.left,e.clientY-r.top)},{passive:false});
+const pts=new Map();let pinch=null;
+view.addEventListener('pointerdown',e=>{view.setPointerCapture(e.pointerId);pts.set(e.pointerId,{x:e.clientX,y:e.clientY})});
+view.addEventListener('pointermove',e=>{if(!pts.has(e.pointerId))return;const p=pts.get(e.pointerId);
+  if(pts.size===1){px+=e.clientX-p.x;py+=e.clientY-p.y;apply()}
+  else if(pts.size===2){const o=[...pts.entries()].find(([k])=>k!==e.pointerId)[1];const d0=Math.hypot(p.x-o.x,p.y-o.y),d1=Math.hypot(e.clientX-o.x,e.clientY-o.y);const r=view.getBoundingClientRect();if(d0>0)zoomAt(d1/d0,(e.clientX+o.x)/2-r.left,(e.clientY+o.y)/2-r.top)}
+  pts.set(e.pointerId,{x:e.clientX,y:e.clientY})});
+['pointerup','pointercancel'].forEach(t=>view.addEventListener(t,e=>pts.delete(e.pointerId)));
+addEventListener('resize',()=>{if(!lb.hidden)fitImg()});
+
+/* ---------- fullscreen ---------- */
+const fsBtn=$('#fsBtn'), docEl=document.documentElement;
+const fsEl=()=>document.fullscreenElement||document.webkitFullscreenElement;
+const fsReq=docEl.requestFullscreen||docEl.webkitRequestFullscreen;
+const fsExit=document.exitFullscreen||document.webkitExitFullscreen;
+function toggleFs(){
+  try{
+    const p=fsEl()?fsExit.call(document):fsReq.call(docEl,{navigationUI:'hide'});
+    if(p&&p.catch)p.catch(()=>{fsBtn.title='Tarayıcınız bu görünümde tam ekrana izin vermiyor';});
+  }catch(e){}
+}
+function fsSync(){const on=!!fsEl();$('#fsIcon').textContent=on?'✕':'⛶';$('#fsLabel').textContent=on?'Tam ekrandan çık':'Tam ekran';fsBtn.setAttribute('aria-label',on?'Tam ekrandan çık':'Tam ekran');fsBtn.classList.toggle('on',on)}
+if(!fsReq||document.fullscreenEnabled===false&&document.webkitFullscreenEnabled!==true){fsBtn.hidden=true}
+else{fsBtn.onclick=toggleFs;document.addEventListener('fullscreenchange',fsSync);document.addEventListener('webkitfullscreenchange',fsSync)}
+
+/* ---------- start ---------- */
+const h=(location.hash||'').match(/^#s(\d+)$/);
+go(h?+h[1]-1:0);
+})();
+
+/* ---------- 360 compass dial ---------- */
+(function(){
+  const NS='http://www.w3.org/2000/svg', g=document.getElementById('dialTicks');
+  const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e};
+  const CARD={0:['K','k'],90:['D',''],180:['G',''],270:['B','']};
+  for(let d=0;d<360;d+=5){
+    const r=d*Math.PI/180, sin=Math.sin(r), cos=-Math.cos(r), major=d%30===0;
+    const r1=major?170:176, r2=184;
+    g.appendChild(el('line',{x1:200+sin*r1,y1:200+cos*r1,x2:200+sin*r2,y2:200+cos*r2,class:'t'+(major?' m':'')}));
+    if(major){
+      const lr=154, x=200+sin*lr, y=200+cos*lr;
+      const tx=el('text',{x,y,transform:`rotate(${d} ${x} ${y})`,class:CARD[d]?'c '+CARD[d][1]:'n'});
+      tx.textContent=CARD[d]?CARD[d][0]:d; g.appendChild(tx);
+    }
+  }
+  const rot=document.getElementById('dialRot'), stage=document.getElementById('dialStage');
+  const degEl=document.getElementById('dialDeg'), dirEl=document.getElementById('dialDir'), btn=document.getElementById('dialPlay');
+  const NAMES=['K · Kuzey','KD · Kuzeydoğu','D · Doğu','GD · Güneydoğu','G · Güney','GB · Güneybatı','B · Batı','KB · Kuzeybatı'];
+  const SPEED=360/40; // derece / saniye
+  let theta=0, playing=!matchMedia('(prefers-reduced-motion: reduce)').matches, last=null, shown=-1, drag=null;
+  function draw(){
+    rot.style.transform=`rotate(${theta}deg)`;
+    const h=Math.round(((360-theta)%360+360)%360)%360;
+    if(h!==shown){shown=h;degEl.textContent=String(h).padStart(3,'0')+'°';dirEl.textContent=NAMES[Math.round(h/45)%8]}
+  }
+  function setPlay(p){playing=p;btn.textContent=p?'❚❚ Durdur':'▶ Döndür';btn.setAttribute('aria-pressed',p);last=null}
+  function tick(t){
+    const onCover=stage.closest('.slide').classList.contains('active');
+    if(playing&&!drag&&onCover){if(last!=null)theta=(theta+SPEED*(t-last)/1000)%360;last=t}else last=null;
+    draw();requestAnimationFrame(tick);
+  }
+  btn.onclick=()=>setPlay(!playing); setPlay(playing);
+  const ang=e=>{const r=stage.getBoundingClientRect();return Math.atan2(e.clientY-(r.top+r.height/2),e.clientX-(r.left+r.width/2))*180/Math.PI};
+  stage.addEventListener('pointerdown',e=>{stage.setPointerCapture(e.pointerId);drag={a:ang(e),t:theta};stage.classList.add('drag');e.stopPropagation()});
+  stage.addEventListener('pointermove',e=>{if(!drag)return;theta=((drag.t+ang(e)-drag.a)%360+360)%360});
+  ['pointerup','pointercancel'].forEach(n=>stage.addEventListener(n,()=>{drag=null;stage.classList.remove('drag');last=null}));
+  stage.addEventListener('touchstart',e=>e.stopPropagation(),{passive:true});
+  stage.addEventListener('touchend',e=>e.stopPropagation(),{passive:true});
+  requestAnimationFrame(tick);
+})();
+
+/* ---------- promo video cues ---------- */
+(function(){
+  const v=document.getElementById('promo'), cues=[...document.querySelectorAll('#cues button')];
+  cues.forEach(b=>b.onclick=()=>{const t=+b.dataset.t;const go=()=>{v.currentTime=t;v.play().catch(()=>{})};
+    if(v.readyState>=1)go();else{v.preload='auto';v.addEventListener('loadedmetadata',go,{once:true});v.load()}});
+  v.addEventListener('timeupdate',()=>{const t=v.currentTime;cues.forEach(b=>b.classList.toggle('on',t>=+b.dataset.t&&t<+b.dataset.end))});
+})();
+</script>
+
+</body></html>

@@ -348,6 +348,11 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
   .progress{gap:2px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* mini K logo, bottom-left of the thank-you slide; height matches the TSP logo */
+.kl-mini{position:absolute;right:max(20px,env(safe-area-inset-right,0px),4vw);bottom:clamp(16px,3vh,32px);padding:0;border:0;background:transparent;cursor:pointer;line-height:0;border-radius:4px}
+.kl-svg-mini{display:block;height:clamp(64px,7vw,92px);width:auto;aspect-ratio:630/611;overflow:visible;filter:drop-shadow(0 2px 3px rgba(43,35,28,.25))}
+@media (max-width:900px){.kl-mini{position:static;display:block;margin:4px 0 0 auto}}
 </style>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="tsp-logo" viewBox="0 0 241 105"><g fill="currentColor"><rect x="2" y="10.5" width="3" height="3" fill="#6A8DB5"/><rect x="3" y="24" width="4.5" height="4.5" fill="#FFD503"/><rect x="14" y="19" width="4.5" height="4.5" fill="#8DC63F"/><rect x="14" y="35" width="4.5" height="4.5" fill="#F58220"/><rect x="8.5" y="45" width="4.5" height="4.5" fill="#EF4023"/><path d="M6.9 57.5V74.6H22.1V42.5" fill="none" stroke="currentColor" stroke-width=".8"/><rect x="15.5" y="52.5" width="4.5" height="4.5"/><rect x="9" y="63" width="4.5" height="4.5"/><rect x="16" y="68" width="4.5" height="4.5"/><rect x="29.9" y="6.4" width="15.2" height="68.2" fill="none" stroke="currentColor" stroke-width=".8"/><rect x="33.5" y="11" width="4.5" height="4.5"/><rect x="38.5" y="19.5" width="4.5" height="4.5"/><rect x="32" y="25" width="4.5" height="4.5"/><rect x="37.5" y="34.5" width="4.5" height="4.5"/><rect x="32" y="44.5" width="4.5" height="4.5"/><rect x="38" y="52" width="4.5" height="4.5"/><rect x="32" y="62" width="4.5" height="4.5"/><rect x="38.5" y="67.5" width="4.5" height="4.5"/><rect x="54.8" y="6" width="1.7" height="69"/><rect x="235.8" y="6" width="1.7" height="69"/><text x="67.5" y="75" font-family="Arial,Helvetica,'Liberation Sans',sans-serif" font-weight="700" font-size="93" textLength="155" lengthAdjust="spacingAndGlyphs">TSP</text><text x="62" y="100.5" font-family="Arial,Helvetica,'Liberation Sans',sans-serif" font-weight="700" font-size="15" textLength="171.5" lengthAdjust="spacingAndGlyphs">Total Solution Provider</text></g></symbol></svg>
@@ -654,7 +659,7 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
     <div class="inner">
       <div class="head"><div class="eyebrow">Vaziyet planı · 1. ve 2. Faz</div><h2>Güvenlik personeli görev konumları</h2></div>
       <div class="mapgrid">
-        <button class="mapbtn" data-zoom="img/map15.jpg" data-cap="Güvenlik personeli görev konumları"><img src="img/map15.jpg" alt="Güvenlik personelinin vaziyet planı üzerindeki görev konumları"><span class="hint">⤢ Büyüt</span></button>
+        <button class="mapbtn" data-zoom="img/map15.gif" data-cap="Güvenlik personeli görev konumları"><img src="img/map15.gif" alt="Güvenlik personelinin vaziyet planı üzerindeki görev konumları"><span class="hint">⤢ Büyüt</span></button>
         <div style="display:flex;flex-direction:column;gap:22px">
           <div class="phase" style="--c:var(--bronze)"><h3>1. ve 2. Faz personel dağılımı</h3><ul><li>Güvenlik müdürü <b>1</b></li><li>Güvenlik amiri <b>3</b></li><li>CCTV <b>6</b></li><li>Güvenlik personeli <b>32</b></li><li><span>Toplam</span> <b>42</b></li></ul></div>
           <p class="note">Yeşil hat 1. Fazı, kırmızı hat 2. Fazı gösterir. Planı büyütüp sürükleyerek parsel numaralarını inceleyebilirsiniz.</p>
@@ -750,7 +755,7 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
   </section>
 
   <!-- 21 KAPANIŞ -->
-  <section class="slide" data-sec="06 Sonuç" data-title="Teşekkürler">
+  <section class="slide" id="tesekkur" data-sec="06 Sonuç" data-title="Teşekkürler">
     <div class="inner"><div class="cover">
       <div class="photo" style="aspect-ratio:3/4"><img src="img/cover.jpg" alt="Taksim 360 projesinin cadde perspektifi"></div>
       <div class="thanks" style="display:flex;flex-direction:column;gap:22px">
@@ -762,6 +767,21 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
         <div><button class="iconbtn" data-go="0">↺ Başa dön</button></div>
       </div>
     </div></div>
+      <button class="kl-mini" type="button" aria-label="Logo animasyonunu tekrar oynat">
+        <svg class="kl-svg-mini" viewBox="226 182 630 611" role="img" aria-label="Altın K logosu">
+          <defs>
+            <linearGradient id="klLightM" gradientUnits="userSpaceOnUse" x1="244" y1="200" x2="840" y2="775"><stop offset="0" stop-color="#e3b862"/><stop offset=".45" stop-color="#f6e4a0"/><stop offset="1" stop-color="#dfae58"/></linearGradient>
+            <linearGradient id="klDarkM" gradientUnits="userSpaceOnUse" x1="244" y1="250" x2="840" y2="775"><stop offset="0" stop-color="#c38a3b"/><stop offset=".55" stop-color="#d9a552"/><stop offset="1" stop-color="#e5bb68"/></linearGradient>
+            <linearGradient id="klSheenGM" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff8e0" stop-opacity="0"/><stop offset=".5" stop-color="#fff8e0" stop-opacity=".75"/><stop offset="1" stop-color="#fff8e0" stop-opacity="0"/></linearGradient>
+            <filter id="klShadowFM" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="7"/></filter>
+            <filter id="klGlowFM" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
+            <clipPath id="klClipM"></clipPath>
+          </defs>
+          <g class="kl-world"><g class="kl-ghosts"></g><g class="kl-pieces"></g>
+            <g clip-path="url(#klClipM)"><g class="kl-sheen"><rect x="-90" y="-760" width="180" height="1520" fill="url(#klSheenGM)"/></g></g>
+            <g class="kl-sparks"></g></g>
+        </svg>
+      </button>
   </section>
 
   </main>
@@ -1056,6 +1076,70 @@ go(h?+h[1]-1:0);
     if(v.readyState>=1)go();else{v.preload='auto';v.addEventListener('loadedmetadata',go,{once:true});v.load()}});
   v.addEventListener('timeupdate',()=>{const t=v.currentTime;cues.forEach(b=>b.classList.toggle('on',t>=+b.dataset.t&&t<+b.dataset.end))});
 })();
+
+/* ---------- closing K logo: magnetic assembly ---------- */
+function klAssemble(slide,root,sfx,replay){
+  if(!slide||!root)return;
+  const NS='http://www.w3.org/2000/svg', q=s=>root.querySelector(s);
+  const el=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e};
+  const P=[
+    {pts:[[244,775],[380,775],[312,707]],tone:'klLight',from:{dx:-520,dy:460,r:-38},w:.6},
+    {pts:[[244,505],[287,462],[600,775],[465,775],[244,554]],tone:'klDark',from:{dx:560,dy:520,r:24},w:.8},
+    {pts:[[318,257],[837,775],[715,775],[258,318]],tone:'klDark',from:{dx:680,dy:260,r:-18},w:1},
+    {pts:[[712,200],[835,200],[260,775],[244,775],[244,668]],tone:'klLight',from:{dx:620,dy:-560,r:16},w:1},
+    {pts:[[488,200],[610,200],[244,566],[244,444]],tone:'klLight',from:{dx:-600,dy:-560,r:-20},w:.9},
+    {pts:[[244,200],[375,200],[244,331]],tone:'klLight',from:{dx:-260,dy:-720,r:40},w:.6}];
+  const D=1000,GAP=430,T0=350;
+  P.forEach((p,i)=>{p.start=T0+i*GAP;p.impact=p.start+.9*D;p.cx=p.pts.reduce((a,v)=>a+v[0],0)/p.pts.length;p.cy=p.pts.reduce((a,v)=>a+v[1],0)/p.pts.length;p.str=p.pts.map(v=>v.join(',')).join(' ')});
+  const SH0=P[P.length-1].impact+450,SHD=1100,TOTAL=SH0+SHD+200;
+  const ghosts=q('.kl-ghosts'),pieces=q('.kl-pieces'),sparks=q('.kl-sparks'),clip=document.getElementById('klClip'+sfx),world=q('.kl-world'),sheen=q('.kl-sheen');
+  let seed=7;const rnd=()=>{seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};
+  P.forEach(p=>{
+    el('polygon',{points:p.str},clip);
+    p.ghost=el('polygon',{points:p.str,fill:'rgba(232,196,109,.05)',stroke:'#f1d68a','stroke-width':2,'stroke-dasharray':'7 9','stroke-linejoin':'round',opacity:0},ghosts);
+    p.shadow=el('polygon',{points:p.str,fill:'#000',filter:`url(#klShadowF${sfx})`,opacity:0},pieces);
+    p.g=el('g',{opacity:0},pieces);
+    el('polygon',{points:p.str,fill:`url(#${p.tone}${sfx})`,stroke:'#fff0bd','stroke-opacity':.35,'stroke-width':1.5,'stroke-linejoin':'round'},p.g);
+    p.flash=el('polygon',{points:p.str,fill:'#fffbea',filter:`url(#klGlowF${sfx})`,opacity:0},p.g);
+    p.sp=[];const n=Math.round(14+10*p.w);
+    for(let k=0;k<n;k++){const e=Math.floor(rnd()*p.pts.length),a=p.pts[e],b=p.pts[(e+1)%p.pts.length],f=rnd(),ang=rnd()*Math.PI*2,s=.25+rnd()*.55;
+      p.sp.push({ox:a[0]+(b[0]-a[0])*f,oy:a[1]+(b[1]-a[1])*f,vx:Math.cos(ang)*s,vy:Math.sin(ang)*s-.15,life:280+rnd()*420,
+        node:el('line',{stroke:rnd()>.4?'#ffe9a6':'#ffb347','stroke-width':2.4,'stroke-linecap':'round',opacity:0},sparks)})}
+  });
+  const easeOut=x=>1-Math.pow(1-x,3),clamp=(x,a=0,b=1)=>Math.min(b,Math.max(a,x));
+  function st(p,i,t){const L=(t-p.start)/D;if(L<0)return null;const f=p.from,hx=f.dx*.07,hy=f.dy*.07,hr=f.r*.12;let dx,dy,r,s,h,op=clamp(L/.16);
+    if(L<.62){const e=easeOut(L/.62);dx=f.dx+(hx-f.dx)*e;dy=f.dy+(hy-f.dy)*e;r=f.r+(hr-f.r)*e;s=2.1+(1.06-2.1)*e;h=1-.7*e}
+    else if(L<.8){const u=(L-.62)/.18,ms=t-p.start,a=5*u;dx=hx+a*Math.sin(ms*.11+i);dy=hy+a*Math.cos(ms*.13+i);r=hr+1.2*u*Math.sin(ms*.09);s=1.06;h=.3}
+    else if(L<.9){const e=Math.pow((L-.8)/.1,3);dx=hx*(1-e);dy=hy*(1-e);r=hr*(1-e);s=1.06-.085*e;h=.3*(1-e)}
+    else{const u=clamp((L-.9)/.22);dx=dy=r=h=0;s=1-.025*(1-u)*Math.cos(u*Math.PI*3)}
+    return{dx,dy,r,s,h,op,L}}
+  function render(t){
+    let sx=0,sy=0;P.forEach((p,i)=>{const tau=t-p.impact;if(tau>=0&&tau<300){const a=8*p.w*Math.pow(1-tau/300,2);sx+=a*Math.sin(tau*.12+i);sy+=a*Math.cos(tau*.15+i*2)}});
+    world.setAttribute('transform',`translate(${sx.toFixed(2)} ${sy.toFixed(2)})`);
+    P.forEach((p,i)=>{const S=st(p,i,t);
+      if(!S){p.g.setAttribute('opacity',0);p.shadow.setAttribute('opacity',0);p.ghost.setAttribute('opacity',0)}
+      else{const{dx,dy,r,s,h,op,L}=S;p.g.setAttribute('opacity',op);
+        p.g.setAttribute('transform',`translate(${p.cx+dx} ${p.cy+dy}) rotate(${r}) scale(${s}) translate(${-p.cx} ${-p.cy})`);
+        p.shadow.setAttribute('transform',`translate(${p.cx+dx+h*55+3} ${p.cy+dy+h*85+5}) rotate(${r}) scale(${1+(s-1)*.5}) translate(${-p.cx} ${-p.cy})`);
+        p.shadow.setAttribute('opacity',(op*(.42-.22*h)).toFixed(3));
+        p.ghost.setAttribute('opacity',(L<.25||L>=.9?0:.6*clamp((L-.25)/.45)).toFixed(3))}
+      const tau=t-p.impact;p.flash.setAttribute('opacity',tau>=0&&tau<260?(.85*Math.pow(1-tau/260,2)).toFixed(3):0);
+      for(const k of p.sp){if(tau<0||tau>k.life){k.node.setAttribute('opacity',0);continue}
+        const g=.0011,x=k.ox+k.vx*tau,y=k.oy+k.vy*tau+.5*g*tau*tau,vy=k.vy+g*tau;
+        k.node.setAttribute('x1',x);k.node.setAttribute('y1',y);k.node.setAttribute('x2',x-k.vx*28);k.node.setAttribute('y2',y-vy*28);k.node.setAttribute('opacity',(1-tau/k.life).toFixed(3))}});
+    const su=(t-SH0)/SHD;sheen.setAttribute('opacity',su>0&&su<1?1:0);sheen.setAttribute('transform',`translate(${100+950*clamp(su)} 487) rotate(35)`)}
+  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let t=TOTAL,raf=0,last=0,timer=0;
+  function frame(now){t=Math.min(TOTAL,t+Math.min(50,now-last));last=now;render(t);raf=t<TOTAL?requestAnimationFrame(frame):0}
+  function play(){cancelAnimationFrame(raf);clearTimeout(timer);if(reduce){t=TOTAL;render(t);return}t=0;render(t);timer=setTimeout(()=>{last=performance.now();raf=requestAnimationFrame(frame)},450)}
+  function stop(){cancelAnimationFrame(raf);clearTimeout(timer);raf=0;t=reduce?TOTAL:0;render(t)}
+  replay&&replay.addEventListener('click',play);
+  let was=slide.classList.contains('active');
+  new MutationObserver(()=>{const on=slide.classList.contains('active');if(on!==was){was=on;on?play():stop()}}).observe(slide,{attributes:true,attributeFilter:['class']});
+  if(was)play();else render(reduce?TOTAL:0);
+}
+klAssemble(document.getElementById('tesekkur'),document.querySelector('#tesekkur .kl-svg-mini'),'M',document.querySelector('#tesekkur .kl-mini'));
 </script>
+
 
 </body></html>

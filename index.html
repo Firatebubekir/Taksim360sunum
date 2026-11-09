@@ -138,11 +138,11 @@ p{margin:0;max-width:66ch}
 .chip{border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;background:var(--surface)}
 
 /* org chart */
-.orgwrap{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:28px;align-items:start}
+.orgwrap{display:grid;grid-template-columns:minmax(0,2.1fr) minmax(0,1fr);gap:28px;align-items:start}
 .org{overflow-x:auto;padding-bottom:8px}
 .tree,.tree ul{list-style:none;margin:0;padding:0}
-.tree ul{display:flex;justify-content:center;padding-top:22px;position:relative}
-.tree li{position:relative;padding:22px 6px 0;display:flex;flex-direction:column;align-items:center}
+.tree ul{display:flex;justify-content:safe center;padding-top:22px;position:relative}
+.tree li{position:relative;padding:22px 4px 0;display:flex;flex-direction:column;align-items:center}
 .tree li::before,.tree li::after{content:"";position:absolute;top:0;right:50%;width:50%;height:22px;border-top:1.5px solid var(--bronze-2)}
 .tree li::after{right:auto;left:50%;border-left:1.5px solid var(--bronze-2)}
 .tree li:only-child::before,.tree li:only-child::after{display:none}
@@ -153,7 +153,7 @@ p{margin:0;max-width:66ch}
 .tree ul ul::before{content:"";position:absolute;top:0;left:50%;height:22px;border-left:1.5px solid var(--bronze-2)}
 .tree>li{padding-top:0}
 .tree>li::before,.tree>li::after{display:none}
-.node{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:10px 14px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;box-shadow:var(--shadow);transition:all .2s;border-top:3px solid var(--bronze-2)}
+.node{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:10px 11px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;box-shadow:var(--shadow);transition:all .2s;border-top:3px solid var(--bronze-2)}
 .node:hover{border-color:var(--bronze)}
 .node.sel{background:var(--deep);color:var(--onDeep);border-color:var(--deep);border-top-color:var(--bronze)}
 .node small{display:block;font-family:var(--f-mono);font-weight:400;letter-spacing:0;text-transform:none;opacity:.75;font-size:11px}
@@ -349,6 +349,42 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
+/* call center image */
+.cc-grid{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(20px,3vw,44px);align-items:center}
+.cc-img{margin:0;justify-self:end;width:100%;max-width:min(100%,calc(46vh * 896 / 810))}
+.cc-img img{display:block;width:100%;height:auto;aspect-ratio:896/810;border-radius:6px;box-shadow:var(--shadow)}
+@media (max-width:900px){.cc-grid{grid-template-columns:minmax(0,1fr)}.cc-img{justify-self:start;max-width:min(100%,420px)}}
+
+/* parcel list */
+.plist .phase ul{gap:0;font-size:13px}
+.plist .phase li{padding-block:2px}
+.plist .phase h3{font-size:17px}
+
+/* aidat increase slide */
+.inc-hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);align-items:center}
+.inc-unit{display:flex;align-items:center;gap:clamp(12px,2vw,24px);flex-wrap:wrap}
+.inc-unit .u{display:flex;flex-direction:column}
+.inc-unit .u small{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.inc-unit .u b{font-family:var(--f-mono);font-weight:500;font-size:clamp(26px,3.2vw,40px);line-height:1.1}
+.inc-unit .u.new b{color:var(--bronze)}
+.inc-unit .arrow{font-size:28px;color:var(--muted)}
+.inc-pct{font-family:var(--f-display);font-size:clamp(48px,5.5vw,80px);line-height:1;color:var(--good)}
+.inc-why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.inc-why .card{padding:16px;gap:4px}
+.inc-why b{font-family:var(--f-mono);font-weight:500;font-size:clamp(18px,2vw,24px)}
+.inc-why small{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.inc-why span{font-size:13px;color:var(--muted)}
+.inc-why .card.key{background:var(--deep);border-color:var(--deep);color:var(--onDeep)}
+.inc-why .card.key small,.inc-why .card.key span{color:color-mix(in srgb,var(--onDeep) 75%,transparent)}
+.inc-tbl td.bar{width:28%;min-width:140px}
+.inc-tbl .pair{display:flex;flex-direction:column;gap:3px}
+.inc-tbl .pair i{display:block;height:6px;border-radius:2px}
+.inc-tbl .pair i.a{background:var(--line)}
+.inc-tbl .pair i.b{background:var(--bronze)}
+.inc-tbl td.up{color:var(--good);font-weight:600}
+.inc-tbl td,.inc-tbl th{padding-block:5px}
+@media (max-width:900px){.inc-hero{grid-template-columns:minmax(0,1fr)}.inc-why{grid-template-columns:minmax(0,1fr)}}
+
 /* mini K logo, bottom-left of the thank-you slide; height matches the TSP logo */
 .kl-mini{position:absolute;right:max(20px,env(safe-area-inset-right,0px),4vw);bottom:clamp(16px,3vh,32px);padding:0;border:0;background:transparent;cursor:pointer;line-height:0;border-radius:4px}
 .kl-svg-mini{display:block;height:clamp(64px,7vw,92px);width:auto;aspect-ratio:630/611;overflow:visible;filter:drop-shadow(0 2px 3px rgba(43,35,28,.25))}
@@ -402,6 +438,7 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
         <button data-go="btm"><span class="n">02</span><span class="t">Bütünsel Tesis Yönetimi Değerlendirme ve Teklifimiz</span><span class="go">Git →</span></button>
         <button data-go="guvenlik"><span class="n">03</span><span class="t">Özel Güvenlik Hizmet Maliyet Teklifimiz</span><span class="go">Git →</span></button>
         <button data-go="butce"><span class="n">04</span><span class="t">2027 Bütçe ve Aidat Analizi</span><span class="go">Git →</span></button>
+        <button data-go="sonuc"><span class="n">05</span><span class="t">Sonuç: 1. etap aidat artış oranı</span><span class="go">Git →</span></button>
       </nav>
     </div>
   </section>
@@ -483,7 +520,7 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
                 <div class="support">
                   <button class="node" data-n="hukuk">Hukuk</button>
                   <button class="node" data-n="ik">İnsan Kaynakları</button>
-                  <button class="node" data-n="muhasebe">Muhasebe · 1</button>
+                  <button class="node" data-n="mali">Mali İşler</button>
                   <button class="node" data-n="satin">Satın Alma</button>
                 </div>
                 <button class="node" data-n="tsp">TSP Merkez</button>
@@ -503,6 +540,9 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
                   <li>
                     <button class="node" data-n="halkla">Halkla İlişkiler<small>1 kişi</small></button>
                     <ul><li><button class="node" data-n="cagri">Çağrı Merkezi<small>3</small></button></li></ul>
+                  </li>
+                  <li>
+                    <button class="node" data-n="muhasebe">Muhasebe<small>1 kişi</small></button>
                   </li>
                 </ul>
               </li></ul>
@@ -544,10 +584,13 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
   <!-- 7 ÇAĞRI MERKEZİ -->
   <section class="slide" data-sec="02 Bütünsel Tesis Yönetimi" data-title="Çağrı Merkezi">
     <div class="inner">
-      <div class="head"><div class="eyebrow">Call Center · 3 personel</div><h2>Çağrı Merkezi</h2>
+      <div class="cc-grid">
+        <div class="head"><div class="eyebrow">Call Center · 3 personel</div><h2>Çağrı Merkezi</h2>
         <p class="lead">Taksim 360 Projesi'nin 7/24 yaşayan bir yapıya sahip olması sebebiyle; tüm şikâyet, öneri ve talepleri hızla toplayabilmek, kurumsal bir hafıza oluşturmak ve hızlı çözümler sunabilmek adına bir Çağrı Merkezi kurulacaktır. Bu birim, Halkla İlişkiler ve Resepsiyon görevlileri ile koordineli, doğrudan Proje Müdürü’ne bağlı olarak çalışacaktır.</p>
         <p class="muted">Söz konusu görev dağılımı, organizasyon şemasında detaylı bir şekilde yer almaktadır. Çağrı merkezinin temel işlevi; site sakinlerinin güvenlik, teknik ve temizlik gibi operasyonel birimlere çok daha hızlı ve kolay ulaşmasını sağlamaktır.</p>
         <p class="muted">Birim, gelen şikâyet ve talepleri ilgili departmanlara aktardıktan sonra işin tamamlanma durumunu ve süresini takip edecek; müşteri memnuniyetini sorgulayarak personelin performansını denetlemek adına geri bildirim süreçlerini yönetecektir.</p></div>
+        <figure class="cc-img"><img src="img/cagri.jpg" alt="Kulaklıklı iki çağrı merkezi görevlisi, ofiste bilgisayar başında çalışıyor"></figure>
+      </div>
       <div class="flow">
         <div><b>Talebi al</b><span>Site sakininden gelen şikâyet, öneri veya talep kayda alınır.</span></div>
         <div><b>Birime aktar</b><span>Güvenlik, teknik veya temizlik birimine hızla iletilir.</span></div>
@@ -622,10 +665,10 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
       <div class="mapgrid">
         <button class="mapbtn" data-zoom="img/map12.jpg" data-cap="Temizlik personeli görev konumları"><img src="img/map12.jpg" alt="Temizlik personelinin vaziyet planı üzerindeki görev konumları"><span class="hint">⤢ Büyüt</span></button>
         <div style="display:flex;flex-direction:column;gap:22px">
-          <div class="phase" style="--c:var(--good)"><h3>1. Faz</h3><ul><li>Binalar <b>9</b></li><li>Çevre <b>2</b></li><li>Makinacı <b>1</b></li></ul></div>
-          <div class="phase" style="--c:var(--c5)"><h3>2. Faz</h3><ul><li>Binalar <b>5</b></li><li>Çevre <b>2</b></li><li>Makinacı <b>1</b></li></ul></div>
+          <div class="phase" style="--c:var(--good)"><h3>1. Faz</h3><ul><li>Binalar <b>10</b></li><li>Çevre <b>2</b></li><li>Makinacı <b>1</b></li></ul></div>
+          <div class="phase" style="--c:var(--c5)"><h3>2. Faz</h3><ul><li>Binalar <b>6</b></li><li>Çevre <b>2</b></li><li>Makinacı <b>1</b></li></ul></div>
           <div class="phase" style="--c:var(--bronze)"><h3>Toplam</h3><ul><li>Temizlik personeli <b>20</b></li><li>Makinacı (binicili temizlik otomatı) <b>2</b></li><li>Elektrikli çöp toplama aracı <b>1</b></li></ul></div>
-          <p class="note">Faz dağılımı vaziyet planındaki 18 kişilik yerleşimi gösterir; 2027 kadrosuna eklenen 2 temizlik personelinin görev noktası saha planlamasında belirlenecektir.</p>
+          <p class="note">Yeşil hat 1. Fazı, kırmızı hat 2. Fazı gösterir. Planı büyütüp sürükleyerek görev noktalarını inceleyebilirsiniz.</p>
         </div>
       </div>
     </div>
@@ -681,6 +724,21 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
     </div>
   </section>
 
+  <!-- 17a PARSEL PLANI -->
+  <section class="slide" data-sec="04 Bütçe ve Aidat" data-title="Parsel vaziyet planı">
+    <div class="inner" style="gap:20px">
+      <div class="head"><div class="eyebrow">Vaziyet planı · 14 parsel · 99.824 m²</div><h2>Parseller ve etaplar</h2></div>
+      <div class="mapgrid">
+        <button class="mapbtn" data-zoom="img/parseller.jpg" data-cap="Taksim 360 parsel vaziyet planı"><img src="img/parseller.jpg" alt="Taksim 360 yerleşkesinin kuş bakışı görünümü; 360 ve 361A ofis, 362A, 362B, 363A, 363B, 361B, 593, 594, 387, 385A ve 385B konut parselleri ile Canopy by Hilton etiketli"><span class="hint">⤢ Büyüt</span></button>
+        <div class="plist" style="display:flex;flex-direction:column;gap:14px">
+          <div class="phase" style="--c:var(--good)"><h3>1. Etap · 9 parsel · 63.196 m²</h3><ul><li>387 / 36 <b>18.926 m²</b></li><li>360 / 36 <b>17.343 m²</b></li><li>361A / 41 <b>6.419 m²</b></li><li>361B / 6 <b>811 m²</b></li><li>362A / 50 <b>5.919 m²</b></li><li>363A / 6 <b>392 m²</b></li><li>363A / 61 <b>2.892 m²</b></li><li>385A / 36 <b>5.164 m²</b></li><li>386B / 34 <b>5.330 m²</b></li></ul></div>
+          <div class="phase" style="--c:var(--c5)"><h3>2. Etap · 5 parsel · 36.628 m²</h3><ul><li>593 / 24 <b>8.596 m²</b></li><li>594 / 8 <b>3.367 m²</b></li><li>361B / 42 <b>15.046 m²</b></li><li>362B / 49 <b>5.346 m²</b></li><li>363B / 63 <b>4.273 m²</b></li></ul></div>
+          <p class="note">Görsel Taksim 360 kataloğundan alınmıştır, etiketleri güncel numaralardan farklı olabilir. Parsel numaraları aidat dağılım tablosundaki güncel numaralardır.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- 17 AİDAT -->
   <section class="slide" data-sec="04 Bütçe ve Aidat" data-title="2027 aidat analizi">
     <div class="inner">
@@ -691,6 +749,30 @@ tr.tot td{font-weight:700;background:color-mix(in srgb,var(--bronze) 10%,transpa
       <div class="facts"><div><small>Aylık bütçe</small><b>17.883.833,92 ₺</b></div><div><small>Toplam alan</small><b>99.824 m²</b></div><div><small>Bağımsız bölüm</small><b>816</b></div><div><small>1. Faz</small><b>63.196 m²</b></div><div><small>2. Faz</small><b>36.628 m²</b></div></div>
       <div class="tablebox" style="border:1px solid var(--line);border-radius:6px;background:var(--surface)"><div class="tscroll" id="aidatT"></div></div>
       <p class="note">Alan dağılımı: konut 49.437 m², ticaret 26.334 m², ofis 19.691 m², müstakil blok 4.362 m².</p>
+    </div>
+  </section>
+
+  <!-- 18 SONUÇ: aidat artışı -->
+  <section class="slide" id="sonuc" data-sec="05 Sonuç" data-title="1. etap aidat artış oranı">
+    <div class="inner" style="gap:22px">
+      <div class="head"><div class="eyebrow">05 · Sonuç · 1. etap parselleri</div><h2>Personel organizasyonu revizyonu, asgari ücret ve fiyat artışları sonrası m² aidatı %10,98 arttı</h2></div>
+      <div class="inc-hero">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="inc-unit">
+            <div class="u"><small>2026 · aidat birim m²</small><b>161,43 ₺</b></div>
+            <span class="arrow" aria-hidden="true">→</span>
+            <div class="u new"><small>Ocak 2027 · aidat birim m²</small><b>179,15 ₺</b></div>
+          </div>
+          <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap"><span class="inc-pct">+%10,98</span><span class="muted" style="font-size:14px">m² başına +17,72 ₺</span></div>
+        </div>
+        <div class="inc-why">
+          <div class="card"><small>Aylık bütçe</small><b>+%75,3</b><span>10,20 milyon ₺ → 17,88 milyon ₺. Personel organizasyonu revizyonu, asgari ücret ve fiyat artışları.</span></div>
+          <div class="card"><small>Aidat ödenen alan</small><b>+%58,0</b><span>63.196 m² → 99.824 m². 2. etap 36.628 m² ile bütçeye katılıyor.</span></div>
+          <div class="card key"><small>Sonuç</small><b>+%10,98</b><span>Artan gider daha geniş bir alana yayıldığı için birim fiyat sınırlı arttı.</span></div>
+        </div>
+      </div>
+      <div class="tablebox" style="border:1px solid var(--line);border-radius:6px;background:var(--surface)"><div class="tscroll" id="incT"></div></div>
+      <p class="note">Aylık tutarlar parselin toplam m²’si ile aidat birim fiyatının çarpımıdır. 2026’da aidat yalnızca 1. etap için hesaplanmıştı; bu nedenle karşılaştırma 1. etaptaki 9 parselle yapılmıştır.</p>
     </div>
   </section>
 
@@ -797,9 +879,10 @@ const ORG={
  tsp:{t:'TSP Merkez',k:'Yönetim danışmanlığı',d:'Avukatlık, mali müşavirlik, bordrolama, insan kaynakları ve satın alma hizmetlerini tek çatı altında sunar. Muhasebe kayıtları ve aidat organizasyonu merkezden yürütülür.',s:[['Yönetim hizmet bedeli','240.000,00 ₺'],['Merkez giderleri','68.640,00 ₺']]},
  hukuk:{t:'Hukuk',k:'TSP Merkez desteği',d:'Yönetim Kurulunun Kat Mülkiyeti Kanunu ve Yönetim Planı doğrultusunda hareket etmesini sağlar. Genel kurul süreçlerini yönetir; Yönetim ve Denetim Kuruluna hukuki danışmanlık verir.',s:[['Kapsam','Merkez hizmeti']]},
  ik:{t:'İnsan Kaynakları',k:'TSP Merkez desteği',d:'Bordrolama ve insan kaynakları süreçleri TSP Merkez tarafından tek çatı altında yürütülür.',s:[['Kapsam','Merkez hizmeti']]},
- muhasebe:{t:'Muhasebe',k:'TSP Merkez · Apsiyon',d:'Sahada 1 muhasebe personeli görev yapar. Aidat tahakkukları, enerji gider paylaşımları ve tahsilat takipleri TSP Merkez denetiminde organize edilir. Nakit tahsilat yapılmaz. 3 aylık Denetim Kurulu raporları eksiksiz hazırlanır.',s:[['Kadro','1'],['Aylık','163.204,13 ₺'],['Yazılım','32.640,00 ₺'],['Bağımsız bölüm','816']]},
+ mali:{t:'Mali İşler',k:'TSP Merkez · Apsiyon',d:'Mali müşavirlik ve muhasebe denetimi TSP Merkez tarafından yürütülür. Muhasebe kayıtları Apsiyon altyapısında tutulur; 3 aylık Denetim Kurulu raporları eksiksiz hazırlanır.',s:[['Kapsam','Merkez hizmeti'],['Yazılım','32.640,00 ₺'],['Bağımsız bölüm','816']]},
+ muhasebe:{t:'Muhasebe',k:'Saha · TSP Merkez denetiminde',d:'Sahada 1 muhasebe personeli görev yapar. Aidat tahakkukları, enerji gider paylaşımları ve tahsilat takipleri TSP Merkez denetiminde organize edilir. Nakit tahsilat yapılmaz. 3 aylık Denetim Kurulu raporları eksiksiz hazırlanır.',s:[['Kadro','1'],['Aylık','163.204,13 ₺'],['Yazılım','32.640,00 ₺'],['Bağımsız bölüm','816']]},
  satin:{t:'Satın Alma',k:'TSP Merkez desteği',d:'Her hafta cuma günü satın alma ve cari ödeme bakiye listeleri Proje Sorumlusu aracılığıyla Yönetim Kurulunun onayına sunulur.',s:[['Döngü','Haftalık · Cuma']]},
- proje:{t:'Proje Sorumlusu',k:'Saha yönetiminin başı',d:'Sitenin yönetim organizasyonunu yürütür, Yönetim Kuruluna raporlar ve toplantılara katılır. Çağrı merkezi ve halkla ilişkiler doğrudan ona bağlıdır.',s:[['Kadro','1'],['Kişi başı aylık','327.977,44 ₺']]},
+ proje:{t:'Proje Sorumlusu',k:'Saha yönetiminin başı',d:'Sitenin yönetim organizasyonunu yürütür, Yönetim Kuruluna raporlar ve toplantılara katılır. Halkla ilişkiler, çağrı merkezi ve muhasebe doğrudan ona bağlıdır.',s:[['Kadro','1'],['Kişi başı aylık','327.977,44 ₺']]},
  saha:{t:'Saha Sorumlusu (Müd. Yrd.)',k:'Operasyon',d:'Saha ve operasyon süreçlerini 7/24 kontrol altında tutar. Teknik ve temizlik şefleri ona bağlanır; görevlendirme, iş tanımı ve vardiya planlarını takip eder.',s:[['Kadro','2'],['Kişi başı aylık','207.932,56 ₺'],['Toplam','415.865,12 ₺']]},
  halkla:{t:'Halkla İlişkiler',k:'Sakin ilişkileri',d:'Çağrı merkezi ve resepsiyonla koordineli çalışır. Havale/EFT dışındaki POS tahsilatları bu birim ve Proje Sorumlusu üzerinden yürütülür.',s:[['Kadro','1'],['Aylık','151.623,11 ₺']]},
  cagri:{t:'Çağrı Merkezi',k:'7/24 talep yönetimi',d:'Şikâyet, öneri ve talepleri toplar, ilgili birime aktarır, tamamlanma süresini takip eder ve memnuniyet geri bildirimi alır.',s:[['Kadro','3'],['Toplam aylık','420.123,46 ₺']]},
@@ -920,6 +1003,11 @@ $('#secReset').onclick=()=>{SEC.forEach((s,i)=>s.c=SEC0[i]);secRender()}; secRen
 const AID=[['387','36',174,18926.12,1,3390686.37,18.96],['360','36',74,17343.12,1,3107086.26,17.37],['361A','41',44,6418.79,1,1149950.06,6.43],['361B','6',1,810.82,1,145261.48,0.81],['362A','50',50,5919.43,1,1060488.38,5.93],['363A','6',1,391.83,1,70198.58,0.39],['363A','61',20,2892.07,1,518125.34,2.90],['385A','36',61,5163.50,1,925060.65,5.17],['386B','34',51,5330.42,1,954965.00,5.34],
 ['593','24',75,8595.81,2,1539972.03,8.61],['594','8',37,3367.17,2,603241.30,3.37],['361B','42',151,15045.90,2,2695530.16,15.07],['362B','49',43,5346.24,2,957799.65,5.36],['363B','63',34,4272.69,2,765468.65,4.28]];
 $('#aidatT').innerHTML=`<table><thead><tr><th>Parsel</th><th>Faz</th><th>Bağımsız bölüm</th><th>Toplam m²</th><th>Aidat birim m²</th><th>Aylık bütçe payı (₺)</th><th>Pay</th></tr></thead><tbody>${AID.map(r=>`<tr><td>${r[0]} / ${r[1]}</td><td>${r[4]}. Faz</td><td>${r[2]}</td><td>${fmt(r[3])}</td><td>179,15</td><td>${fmt(r[5])}</td><td>${fmt(r[6])} %</td></tr>`).join('')}<tr class="tot"><td>Toplam</td><td></td><td>816</td><td>99.823,91</td><td>179,15</td><td>17.883.833,92</td><td>100,00 %</td></tr></tbody></table>`;
+
+/* ---------- 1. etap aidat increase ---------- */
+const INC=[['387 / 36',18926.12,3055298.85,3390686.37],['360 / 36',17343.12,2799750.86,3107086.26],['361A / 41',6418.79,1036203.50,1149950.06],['361B / 6',810.82,130893.04,145261.48],['362A / 50',5919.43,955590.87,1060488.38],['363A / 6',391.83,63254.93,70198.58],['363A / 61',2892.07,466875.31,518125.34],['385A / 36',5163.50,833558.88,925060.65],['386B / 34',5330.42,860505.26,954965.00]];
+const IMAX=Math.max(...INC.map(r=>r[3])), pc=(a,b)=>'+%'+((b/a-1)*100).toFixed(2).replace('.',',');
+$('#incT').innerHTML=`<table class="inc-tbl"><thead><tr><th>Parsel</th><th>Toplam m²</th><th>2026 aylık aidat (₺)</th><th>2027 aylık aidat (₺)</th><th>Aylık fark (₺)</th><th>Artış</th><th style="text-align:left">2026 / 2027</th></tr></thead><tbody>${INC.map(r=>`<tr><td>${r[0]}</td><td>${fmt(r[1])}</td><td>${fmt(r[2])}</td><td>${fmt(r[3])}</td><td>+${fmt(r[3]-r[2])}</td><td class="up">${pc(r[2],r[3])}</td><td class="bar"><div class="pair"><i class="a" style="width:${r[2]/IMAX*100}%"></i><i class="b" style="width:${r[3]/IMAX*100}%"></i></div></td></tr>`).join('')}<tr class="tot"><td>1. etap toplam</td><td>63.196,10</td><td>10.201.931,50</td><td>11.321.822,12</td><td>+1.119.890,62</td><td>+%10,98</td><td></td></tr></tbody></table>`;
 
 /* ---------- lightbox (zoom + pan) ---------- */
 const lb=$('#lightbox'),view=$('#lbview'),img=$('#lbimg');let sc=1,px=0,py=0,fit=1;
